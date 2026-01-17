@@ -3,69 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="coinzilla" content="876e6032c5174633e8f3eef3d3df0f9e" />
-    <title>Maestro Tarot | Oráculo de Partidos</title>
+    <title>Maestro Tarot | Oráculo de La Liga</title>
     <style>
-        body { background-color: #0b0b1a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding: 0; }
-        .seccion { background: #16213e; padding: 15px; border-radius: 15px; max-width: 850px; margin: 20px auto; border: 1px solid gold; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
-        h1 { color: gold; padding: 20px; text-shadow: 2px 2px 5px black; }
-        input { padding: 12px; width: 80%; border-radius: 5px; border: 1px solid gold; background: #0b0b1a; color: white; font-size: 1rem; margin: 10px 0; }
-        .card-container { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
-        .card { width: 80px; height: 125px; background: #2a2a4a; border: 2px solid gold; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 40px; transition: 0.4s; }
+        body { background-color: #0b0b1a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
+        .header { background: linear-gradient(to bottom, #1a1a2e, #0b0b1a); padding: 30px; border-bottom: 2px solid gold; }
+        .seccion { background: #16213e; padding: 20px; border-radius: 15px; max-width: 800px; margin: 20px auto; border: 1px solid #333; }
+        select { padding: 12px; width: 90%; border-radius: 8px; background: #0b0b1a; color: gold; border: 1px solid gold; font-size: 1.1rem; margin-bottom: 20px; }
+        .grid-partidos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .btn-partido { background: #1a1a2e; color: white; border: 1px solid #444; padding: 10px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; transition: 0.3s; }
+        .btn-partido:hover { border-color: gold; color: gold; }
+        .btn-partido.active { background: gold; color: black; font-weight: bold; }
+        .card-container { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
+        .card { width: 80px; height: 120px; background: #2a2a4a; border: 2px solid gold; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 40px; transition: 0.4s; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 0 20px gold; }
-        #resultado { margin: 20px; padding: 20px; border-radius: 10px; background: #0f3460; border: 1px dashed gold; color: gold; font-size: 1.4rem; font-weight: bold; display: none; }
-        iframe { border-radius: 10px; background: white; margin-bottom: 10px; }
+        #resultado { margin-top: 20px; padding: 20px; border-radius: 10px; background: #0f3460; border: 1px dashed gold; color: gold; font-size: 1.3rem; font-weight: bold; display: none; }
     </style>
 </head>
 <body>
 
-    <h1>🔮 MAESTRO TAROT</h1>
-
-    <div class="seccion">
-        <h2 style="color: gold;">⚽ 1. MIRA LOS PARTIDOS DE HOY</h2>
-        <p>Consulta aquí la Champions, La Liga o la Copa:</p>
-        <iframe src="https://www.livescore.in/es/free/widgets/live/?type=event&category=soccer&league=all&width=100%&height=500&color_0=16213e&color_1=ffffff&color_2=gold&color_3=333333&color_4=eeeeee" 
-        width="100%" height="500" frameborder="0"></iframe>
+    <div class="header">
+        <h1>🔮 MAESTRO TAROT</h1>
+        <p>Selecciona la Jornada y consulta el Oráculo</p>
     </div>
 
     <div class="seccion">
-        <h2 style="color: gold;">🃏 2. ESCRIBE EL PARTIDO O EQUIPO</h2>
-        <input type="text" id="partidoElegido" placeholder="Ej: Real Madrid vs City o tu equipo favorito...">
-        
-        <p>Concentrate en tu elección y pulsa una carta:</p>
+        <h2 style="color: gold;">⚽ CALENDARIO DE LA LIGA</h2>
+        <select id="selectorJornada" onchange="cambiarJornada()">
+            <option value="">-- Elige una Jornada --</option>
+            <option value="j21">Jornada 21 (Actual)</option>
+            <option value="j22">Jornada 22</option>
+            <option value="j23">Jornada 23</option>
+            <option value="j24">Jornada 24</option>
+            </select>
+
+        <div id="contenedorPartidos" class="grid-partidos">
+            </div>
+    </div>
+
+    <div class="seccion">
+        <h2 style="color: gold;">🃏 PREDICCIÓN DEL TAROT</h2>
+        <p id="info-seleccion">Selecciona un partido arriba para preguntar</p>
         <div class="card-container">
-            <div class="card" onclick="revelar()">?</div>
-            <div class="card" onclick="revelar()">?</div>
-            <div class="card" onclick="revelar()">?</div>
+            <div class="card" onclick="tirada()">?</div>
+            <div class="card" onclick="tirada()">?</div>
+            <div class="card" onclick="tirada()">?</div>
         </div>
         <div id="resultado"></div>
     </div>
 
     <script>
-        function revelar() {
-            const partido = document.getElementById('partidoElegido').value;
-            if (partido === "") {
-                alert("Por favor, escribe el nombre del partido o tu equipo primero.");
+        const partidos = {
+            j21: ["Levante vs Elche", "Rayo vs Osasuna", "Valencia vs Espanyol", "Sevilla vs Athletic", "Villarreal vs Real Madrid", "Atlético vs Mallorca", "Barcelona vs Oviedo", "R. Sociedad vs Celta", "Alavés vs Betis", "Girona vs Getafe"],
+            j22: ["Espanyol vs Alavés", "Oviedo vs Girona", "Osasuna vs Villarreal", "Levante vs Atlético", "Elche vs Barcelona", "Real Madrid vs Rayo", "Betis vs Valencia", "Getafe vs Celta", "Athletic vs R. Sociedad", "Mallorca vs Sevilla"],
+            j23: ["Alavés vs Getafe", "Athletic vs Levante", "Atlético vs Betis", "Barcelona vs Mallorca", "Celta vs Osasuna", "Rayo vs Oviedo", "R. Sociedad vs Elche", "Sevilla vs Girona", "Valencia vs Real Madrid", "Villarreal vs Espanyol"],
+            j24: ["Elche vs Osasuna", "Espanyol vs Celta", "Getafe vs Villarreal", "Girona vs Barcelona", "Levante vs Valencia", "Mallorca vs Betis", "Rayo vs Atlético", "Real Madrid vs R. Sociedad", "Oviedo vs Athletic", "Sevilla vs Alavés"]
+        };
+
+        let partidoSeleccionado = "";
+
+        function cambiarJornada() {
+            const j = document.getElementById('selectorJornada').value;
+            const container = document.getElementById('contenedorPartidos');
+            container.innerHTML = "";
+            if(!j) return;
+
+            partidos[j].forEach(p => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-partido';
+                btn.innerText = p;
+                btn.onclick = () => {
+                    document.querySelectorAll('.btn-partido').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    partidoSeleccionado = p;
+                    document.getElementById('info-seleccion').innerText = "Consultando: " + p;
+                };
+                container.appendChild(btn);
+            });
+        }
+
+        function tirada() {
+            if(!partidoSeleccionado) {
+                alert("Primero debes seleccionar un partido del calendario.");
                 return;
             }
-
-            const predicciones = [
-                "🃏 EL SOL: ¡Victoria brillante! " + partido + " dominará el campo con una energía imparable.",
-                "🃏 LA TORRE: ¡Cuidado! Un suceso inesperado (lesión o roja) hundirá las esperanzas en el partido de " + partido + ".",
-                "🃏 EL CARRO: Éxito total. " + partido + " avanzará con determinación hacia la victoria final.",
-                "🃏 EL COLGADO: Las fuerzas están igualadas. El destino de " + partido + " es un empate muy sufrido.",
-                "🃏 EL MAGO: Una genialidad táctica o un golazo individual decidirá el destino de " + partido + ".",
-                "🃏 LA LUNA: Mucha confusión y polémica arbitral rodeará el resultado de " + partido + ".",
-                "🃏 LA RUEDA DE LA FORTUNA: El azar será clave. Un gol de rebote dará la victoria en " + partido + "."
+            const frases = [
+                "✨ EL SOL: " + partidoSeleccionado + " terminará con una victoria brillante para el equipo local.",
+                "✨ LA TORRE: ¡Cuidado! Un giro dramático en " + partidoSeleccionado + " traerá una derrota inesperada.",
+                "✨ EL CARRO: El equipo visitante en " + partidoSeleccionado + " asaltará el campo con éxito.",
+                "✨ EL COLGADO: No busques un ganador. " + partidoSeleccionado + " está destinado al empate.",
+                "✨ EL MAGO: Una genialidad decidirá " + partidoSeleccionado + ". El destino favorece al talento individual."
             ];
-
-            const random = predicciones[Math.floor(Math.random() * predicciones.length)];
-            const resDiv = document.getElementById('resultado');
-            resDiv.style.display = "block";
-            resDiv.innerHTML = "✨ EL ORÁCULO PREDICE PARA:<br><br>" + random;
-            resDiv.scrollIntoView({behavior: "smooth"});
+            const res = document.getElementById('resultado');
+            res.style.display = "block";
+            res.innerHTML = frases[Math.floor(Math.random() * frases.length)];
+            res.scrollIntoView({behavior: "smooth"});
         }
     </script>
-
 </body>
 </html>
