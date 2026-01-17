@@ -3,100 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maestro Tarot | Oráculo de La Liga</title>
+    <title>Maestro Tarot | Oráculo Total</title>
     <style>
         body { background-color: #0b0b1a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
-        .header { background: linear-gradient(to bottom, #1a1a2e, #0b0b1a); padding: 30px; border-bottom: 2px solid gold; }
-        .seccion { background: #16213e; padding: 20px; border-radius: 15px; max-width: 800px; margin: 20px auto; border: 1px solid #333; }
-        select { padding: 12px; width: 90%; border-radius: 8px; background: #0b0b1a; color: gold; border: 1px solid gold; font-size: 1.1rem; margin-bottom: 20px; }
-        .grid-partidos { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .btn-partido { background: #1a1a2e; color: white; border: 1px solid #444; padding: 10px; border-radius: 5px; cursor: pointer; font-size: 0.9rem; transition: 0.3s; }
-        .btn-partido:hover { border-color: gold; color: gold; }
-        .btn-partido.active { background: gold; color: black; font-weight: bold; }
-        .card-container { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
-        .card { width: 80px; height: 120px; background: #2a2a4a; border: 2px solid gold; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 40px; transition: 0.4s; }
-        .card:hover { transform: translateY(-10px); box-shadow: 0 0 20px gold; }
-        #resultado { margin-top: 20px; padding: 20px; border-radius: 10px; background: #0f3460; border: 1px dashed gold; color: gold; font-size: 1.3rem; font-weight: bold; display: none; }
+        .header { background: linear-gradient(to bottom, #1a1a2e, #0b0b1a); padding: 25px; border-bottom: 3px solid gold; }
+        .seccion { background: #16213e; padding: 20px; border-radius: 15px; max-width: 850px; margin: 20px auto; border: 1px solid #333; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        h2 { color: gold; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* Estilo Partidos */
+        .grid-partidos { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 15px; }
+        .btn-partido { background: #1a1a2e; color: #ccc; border: 1px solid #444; padding: 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
+        .btn-partido:hover { border-color: gold; color: white; }
+        .btn-partido.active { background: gold; color: black; font-weight: bold; border-color: white; }
+
+        /* Estilo Cartas */
+        .card-container { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
+        .card-box { width: 100px; text-align: center; }
+        .card-img { width: 100px; height: 170px; background-image: url('https://www.trustedtarot.com/img/cards/back-sun.png'); background-size: cover; border: 2px solid gold; border-radius: 8px; cursor: pointer; transition: 0.4s; }
+        .card-img:hover { transform: translateY(-10px); box-shadow: 0 0 20px gold; }
+        
+        .resultado-box { margin-top: 20px; padding: 20px; border-radius: 10px; background: #0f3460; border: 1px dashed gold; color: gold; font-size: 1.2rem; display: none; min-height: 80px; }
+        hr { border: 0; height: 1px; background: gold; margin: 40px 0; opacity: 0.3; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1>🔮 MAESTRO TAROT</h1>
-        <p>Selecciona la Jornada y consulta el Oráculo</p>
+        <p>Tu Oráculo de Fútbol y Destino Personal</p>
     </div>
 
     <div class="seccion">
-        <h2 style="color: gold;">⚽ CALENDARIO DE LA LIGA</h2>
-        <select id="selectorJornada" onchange="cambiarJornada()">
-            <option value="">-- Elige una Jornada --</option>
-            <option value="j21">Jornada 21 (Actual)</option>
-            <option value="j22">Jornada 22</option>
-            <option value="j23">Jornada 23</option>
-            <option value="j24">Jornada 24</option>
-            </select>
-
-        <div id="contenedorPartidos" class="grid-partidos">
-            </div>
-    </div>
-
-    <div class="seccion">
-        <h2 style="color: gold;">🃏 PREDICCIÓN DEL TAROT</h2>
-        <p id="info-seleccion">Selecciona un partido arriba para preguntar</p>
-        <div class="card-container">
-            <div class="card" onclick="tirada()">?</div>
-            <div class="card" onclick="tirada()">?</div>
-            <div class="card" onclick="tirada()">?</div>
+        <h2>⚽ 1. ELIGE EL PARTIDO</h2>
+        <div class="grid-partidos">
+            <button class="btn-partido" onclick="selectP('Villarreal vs Real Madrid')">Villarreal vs Real Madrid</button>
+            <button class="btn-partido" onclick="selectP('Barcelona vs Oviedo')">Barcelona vs Oviedo</button>
+            <button class="btn-partido" onclick="selectP('Sevilla vs Athletic')">Sevilla vs Athletic</button>
+            <button class="btn-partido" onclick="selectP('Valencia vs Espanyol')">Valencia vs Espanyol</button>
+            <button class="btn-partido" onclick="selectP('Atlético vs Mallorca')">Atlético vs Mallorca</button>
+            <button class="btn-partido" onclick="selectP('Girona vs Getafe')">Girona vs Getafe</button>
         </div>
-        <div id="resultado"></div>
+    </div>
+
+    <div class="seccion">
+        <h2>🃏 2. PREDICCIÓN DEPORTIVA</h2>
+        <p id="txt-p">Selecciona un partido arriba primero</p>
+        <div class="card-container">
+            <div class="card-img" onclick="tiradaDep()"></div>
+            <div class="card-img" onclick="tiradaDep()"></div>
+            <div class="card-img" onclick="tiradaDep()"></div>
+        </div>
+        <div id="res-dep" class="resultado-box"></div>
+    </div>
+
+    <hr>
+
+    <div class="seccion" style="border-color: #00ffcc;">
+        <h2 style="color: #00ffcc;">🌟 TAROT PERSONAL</h2>
+        <p>Consulta sobre Amor, Dinero o Salud:</p>
+        <div class="card-container">
+            <div class="card-img" style="border-color: #00ffcc;" onclick="tiradaPers()"></div>
+            <div class="card-img" style="border-color: #00ffcc;" onclick="tiradaPers()"></div>
+            <div class="card-img" style="border-color: #00ffcc;" onclick="tiradaPers()"></div>
+        </div>
+        <div id="res-pers" class="resultado-box" style="border-color: #00ffcc; color: #00ffcc;"></div>
     </div>
 
     <script>
-        const partidos = {
-            j21: ["Levante vs Elche", "Rayo vs Osasuna", "Valencia vs Espanyol", "Sevilla vs Athletic", "Villarreal vs Real Madrid", "Atlético vs Mallorca", "Barcelona vs Oviedo", "R. Sociedad vs Celta", "Alavés vs Betis", "Girona vs Getafe"],
-            j22: ["Espanyol vs Alavés", "Oviedo vs Girona", "Osasuna vs Villarreal", "Levante vs Atlético", "Elche vs Barcelona", "Real Madrid vs Rayo", "Betis vs Valencia", "Getafe vs Celta", "Athletic vs R. Sociedad", "Mallorca vs Sevilla"],
-            j23: ["Alavés vs Getafe", "Athletic vs Levante", "Atlético vs Betis", "Barcelona vs Mallorca", "Celta vs Osasuna", "Rayo vs Oviedo", "R. Sociedad vs Elche", "Sevilla vs Girona", "Valencia vs Real Madrid", "Villarreal vs Espanyol"],
-            j24: ["Elche vs Osasuna", "Espanyol vs Celta", "Getafe vs Villarreal", "Girona vs Barcelona", "Levante vs Valencia", "Mallorca vs Betis", "Rayo vs Atlético", "Real Madrid vs R. Sociedad", "Oviedo vs Athletic", "Sevilla vs Alavés"]
-        };
+        let pSel = "";
+        const cartasImg = [
+            {n: "EL MAGO", i: "https://www.trustedtarot.com/img/cards/the-magician.png"},
+            {n: "EL SOL", i: "https://www.trustedtarot.com/img/cards/the-sun.png"},
+            {n: "LA TORRE", i: "https://www.trustedtarot.com/img/cards/the-tower.png"},
+            {n: "EL CARRO", i: "https://www.trustedtarot.com/img/cards/the-chariot.png"},
+            {n: "LA RUEDA", i: "https://www.trustedtarot.com/img/cards/the-wheel-of-fortune.png"}
+        ];
 
-        let partidoSeleccionado = "";
-
-        function cambiarJornada() {
-            const j = document.getElementById('selectorJornada').value;
-            const container = document.getElementById('contenedorPartidos');
-            container.innerHTML = "";
-            if(!j) return;
-
-            partidos[j].forEach(p => {
-                const btn = document.createElement('button');
-                btn.className = 'btn-partido';
-                btn.innerText = p;
-                btn.onclick = () => {
-                    document.querySelectorAll('.btn-partido').forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    partidoSeleccionado = p;
-                    document.getElementById('info-seleccion').innerText = "Consultando: " + p;
-                };
-                container.appendChild(btn);
-            });
+        function selectP(nombre) {
+            pSel = nombre;
+            document.querySelectorAll('.btn-partido').forEach(b => b.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById('txt-p').innerText = "Consultando por: " + nombre;
         }
 
-        function tirada() {
-            if(!partidoSeleccionado) {
-                alert("Primero debes seleccionar un partido del calendario.");
-                return;
-            }
+        function tiradaDep() {
+            if(!pSel) { alert("Elige un partido primero"); return; }
+            const c = cartasImg[Math.floor(Math.random()*cartasImg.length)];
             const frases = [
-                "✨ EL SOL: " + partidoSeleccionado + " terminará con una victoria brillante para el equipo local.",
-                "✨ LA TORRE: ¡Cuidado! Un giro dramático en " + partidoSeleccionado + " traerá una derrota inesperada.",
-                "✨ EL CARRO: El equipo visitante en " + partidoSeleccionado + " asaltará el campo con éxito.",
-                "✨ EL COLGADO: No busques un ganador. " + partidoSeleccionado + " está destinado al empate.",
-                "✨ EL MAGO: Una genialidad decidirá " + partidoSeleccionado + ". El destino favorece al talento individual."
+                "Victoria clara en " + pSel + ". Los astros sonríen al local.",
+                "Cuidado en " + pSel + ", " + c.n + " indica una sorpresa o lesión grave.",
+                "El destino de " + pSel + " es un empate táctico.",
+                "Remontada épica en " + pSel + ". La energía cambia al final."
             ];
-            const res = document.getElementById('resultado');
-            res.style.display = "block";
-            res.innerHTML = frases[Math.floor(Math.random() * frases.length)];
-            res.scrollIntoView({behavior: "smooth"});
+            const r = document.getElementById('res-dep');
+            r.style.display = "block";
+            r.innerHTML = `<img src="${c.i}" width="60"><br><strong>${c.n}</strong><br>${frases[Math.floor(Math.random()*frases.length)]}`;
+        }
+
+        function tiradaPers() {
+            const c = cartasImg[Math.floor(Math.random()*cartasImg.length)];
+            const consejos = ["Vienen cambios positivos en el amor.", "Vigila tus gastos esta semana.", "Tu salud mejorará si descansas más.", "Una noticia inesperada llegará pronto."];
+            const r = document.getElementById('res-pers');
+            r.style.display = "block";
+            r.innerHTML = `<img src="${c.i}" width="60"><br><strong>${c.n}</strong><br>${consejos[Math.floor(Math.random()*consejos.length)]}`;
         }
     </script>
 </body>
