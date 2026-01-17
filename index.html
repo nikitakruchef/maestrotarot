@@ -3,55 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maestro Tarot | Oráculo Total</title>
+    <title>Maestro Tarot | Oráculo de Élite</title>
     <style>
         body { background-color: #0b0b1a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
         .header { background: linear-gradient(to bottom, #1a1a2e, #0b0b1a); padding: 25px; border-bottom: 3px solid gold; }
         .seccion { background: #16213e; padding: 20px; border-radius: 15px; max-width: 850px; margin: 20px auto; border: 1px solid #333; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
         h2 { color: gold; text-transform: uppercase; letter-spacing: 1px; }
         
-        /* Estilo Partidos */
+        /* Botones de Partidos */
         .grid-partidos { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; margin-top: 15px; }
         .btn-partido { background: #1a1a2e; color: #ccc; border: 1px solid #444; padding: 12px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-        .btn-partido:hover { border-color: gold; color: white; }
         .btn-partido.active { background: gold; color: black; font-weight: bold; border-color: white; }
 
-        /* Estilo Cartas */
-        .card-container { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
-        .card-box { width: 100px; text-align: center; }
-        .card-img { width: 100px; height: 170px; background-image: url('https://www.trustedtarot.com/img/cards/back-sun.png'); background-size: cover; border: 2px solid gold; border-radius: 8px; cursor: pointer; transition: 0.4s; }
-        .card-img:hover { transform: translateY(-10px); box-shadow: 0 0 20px gold; }
+        /* Contenedor de Cartas */
+        .card-container { display: flex; justify-content: center; gap: 15px; margin: 25px 0; }
+        .card-img { width: 100px; height: 170px; background-size: cover; border: 2px solid gold; border-radius: 8px; cursor: pointer; transition: 0.5s; background-image: url('https://www.trustedtarot.com/img/cards/back-sun.png'); }
         
-        .resultado-box { margin-top: 20px; padding: 20px; border-radius: 10px; background: #0f3460; border: 1px dashed gold; color: gold; font-size: 1.2rem; display: none; min-height: 80px; }
-        hr { border: 0; height: 1px; background: gold; margin: 40px 0; opacity: 0.3; }
+        .resultado-box { margin-top: 20px; padding: 25px; border-radius: 10px; background: #0f3460; border: 2px solid gold; color: gold; font-size: 1.4rem; display: none; }
+        hr { border: 0; height: 1px; background: gold; margin: 50px 0; opacity: 0.4; }
     </style>
 </head>
 <body>
 
     <div class="header">
         <h1>🔮 MAESTRO TAROT</h1>
-        <p>Tu Oráculo de Fútbol y Destino Personal</p>
+        <p>Predicciones Instantáneas de Fútbol y Destino</p>
     </div>
 
     <div class="seccion">
-        <h2>⚽ 1. ELIGE EL PARTIDO</h2>
+        <h2>⚽ ELIGE TU PARTIDO</h2>
         <div class="grid-partidos">
             <button class="btn-partido" onclick="selectP('Villarreal vs Real Madrid')">Villarreal vs Real Madrid</button>
             <button class="btn-partido" onclick="selectP('Barcelona vs Oviedo')">Barcelona vs Oviedo</button>
             <button class="btn-partido" onclick="selectP('Sevilla vs Athletic')">Sevilla vs Athletic</button>
             <button class="btn-partido" onclick="selectP('Valencia vs Espanyol')">Valencia vs Espanyol</button>
             <button class="btn-partido" onclick="selectP('Atlético vs Mallorca')">Atlético vs Mallorca</button>
-            <button class="btn-partido" onclick="selectP('Girona vs Getafe')">Girona vs Getafe</button>
         </div>
     </div>
 
     <div class="seccion">
-        <h2>🃏 2. PREDICCIÓN DEPORTIVA</h2>
-        <p id="txt-p">Selecciona un partido arriba primero</p>
-        <div class="card-container">
-            <div class="card-img" onclick="tiradaDep()"></div>
-            <div class="card-img" onclick="tiradaDep()"></div>
-            <div class="card-img" onclick="tiradaDep()"></div>
+        <h2>🃏 TIRADA DEPORTIVA (1 CLIC)</h2>
+        <p id="txt-p">Selecciona un partido arriba para empezar</p>
+        <div class="card-container" onclick="tiradaUnica('dep')">
+            <div id="c-dep-1" class="card-img"></div>
+            <div id="c-dep-2" class="card-img"></div>
+            <div id="c-dep-3" class="card-img"></div>
         </div>
         <div id="res-dep" class="resultado-box"></div>
     </div>
@@ -59,53 +55,62 @@
     <hr>
 
     <div class="seccion" style="border-color: #00ffcc;">
-        <h2 style="color: #00ffcc;">🌟 TAROT PERSONAL</h2>
-        <p>Consulta sobre Amor, Dinero o Salud:</p>
-        <div class="card-container">
-            <div class="card-img" style="border-color: #00ffcc;" onclick="tiradaPers()"></div>
-            <div class="card-img" style="border-color: #00ffcc;" onclick="tiradaPers()"></div>
-            <div class="card-img" style="border-color: #00ffcc;" onclick="tiradaPers()"></div>
+        <h2 style="color: #00ffcc;">🌟 TIRADA PERSONAL TOTAL</h2>
+        <p>Haz clic en las cartas para tu lectura general:</p>
+        <div class="card-container" onclick="tiradaUnica('pers')">
+            <div id="c-pers-1" class="card-img" style="border-color: #00ffcc;"></div>
+            <div id="c-pers-2" class="card-img" style="border-color: #00ffcc;"></div>
+            <div id="c-pers-3" class="card-img" style="border-color: #00ffcc;"></div>
         </div>
         <div id="res-pers" class="resultado-box" style="border-color: #00ffcc; color: #00ffcc;"></div>
     </div>
 
     <script>
         let pSel = "";
-        const cartasImg = [
+        const mazo = [
             {n: "EL MAGO", i: "https://www.trustedtarot.com/img/cards/the-magician.png"},
             {n: "EL SOL", i: "https://www.trustedtarot.com/img/cards/the-sun.png"},
             {n: "LA TORRE", i: "https://www.trustedtarot.com/img/cards/the-tower.png"},
             {n: "EL CARRO", i: "https://www.trustedtarot.com/img/cards/the-chariot.png"},
-            {n: "LA RUEDA", i: "https://www.trustedtarot.com/img/cards/the-wheel-of-fortune.png"}
+            {n: "LA RUEDA", i: "https://www.trustedtarot.com/img/cards/the-wheel-of-fortune.png"},
+            {n: "EL EMPERADOR", i: "https://www.trustedtarot.com/img/cards/the-emperor.png"},
+            {n: "LA FUERZA", i: "https://www.trustedtarot.com/img/cards/strength.png"}
         ];
 
         function selectP(nombre) {
             pSel = nombre;
             document.querySelectorAll('.btn-partido').forEach(b => b.classList.remove('active'));
             event.target.classList.add('active');
-            document.getElementById('txt-p').innerText = "Consultando por: " + nombre;
+            document.getElementById('txt-p').innerText = "Partido listo: " + nombre;
         }
 
-        function tiradaDep() {
-            if(!pSel) { alert("Elige un partido primero"); return; }
-            const c = cartasImg[Math.floor(Math.random()*cartasImg.length)];
-            const frases = [
-                "Victoria clara en " + pSel + ". Los astros sonríen al local.",
-                "Cuidado en " + pSel + ", " + c.n + " indica una sorpresa o lesión grave.",
-                "El destino de " + pSel + " es un empate táctico.",
-                "Remontada épica en " + pSel + ". La energía cambia al final."
-            ];
-            const r = document.getElementById('res-dep');
-            r.style.display = "block";
-            r.innerHTML = `<img src="${c.i}" width="60"><br><strong>${c.n}</strong><br>${frases[Math.floor(Math.random()*frases.length)]}`;
-        }
+        function tiradaUnica(tipo) {
+            if(tipo === 'dep' && !pSel) { alert("¡Eh! Elige un partido primero."); return; }
+            
+            // Seleccionar 3 cartas aleatorias
+            let seleccionadas = [...mazo].sort(() => 0.5 - Math.random()).slice(0, 3);
+            
+            // Dar la vuelta a las imágenes
+            for(let i=1; i<=3; i++) {
+                let el = document.getElementById(`c-${tipo}-${i}`);
+                el.style.backgroundImage = `url('${seleccionadas[i-1].i}')`;
+                el.style.transform = "rotateY(360deg)";
+            }
 
-        function tiradaPers() {
-            const c = cartasImg[Math.floor(Math.random()*cartasImg.length)];
-            const consejos = ["Vienen cambios positivos en el amor.", "Vigila tus gastos esta semana.", "Tu salud mejorará si descansas más.", "Una noticia inesperada llegará pronto."];
-            const r = document.getElementById('res-pers');
-            r.style.display = "block";
-            r.innerHTML = `<img src="${c.i}" width="60"><br><strong>${c.n}</strong><br>${consejos[Math.floor(Math.random()*consejos.length)]}`;
+            const res = document.getElementById(`res-${tipo}`);
+            res.style.display = "block";
+
+            if(tipo === 'dep') {
+                const predicciones = [
+                    `Los astros indican que ${pSel} se decidirá por la mínima. Victoria local.`,
+                    `¡Sorpresa! ${pSel} sufrirá un vuelco inesperado por la influencia de ${seleccionadas[0].n}.`,
+                    `Empate técnico en ${pSel}. Las fuerzas están equilibradas hoy.`
+                ];
+                res.innerHTML = `<h3>EL ORÁCULO DICE:</h3>${predicciones[Math.floor(Math.random()*predicciones.length)]}`;
+            } else {
+                res.innerHTML = `<h3>TU DESTINO HOY:</h3>${seleccionadas[0].n} domina tu mañana, ${seleccionadas[1].n} tu tarde y ${seleccionadas[2].n} tu noche. Fortuna en camino.`;
+            }
+            res.scrollIntoView({behavior: "smooth"});
         }
     </script>
 </body>
