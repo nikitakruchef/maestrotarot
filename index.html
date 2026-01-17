@@ -4,67 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="coinzilla" content="876e6032c5174633e8f3eef3d3df0f9e" />
-    <title>Maestro Tarot | Resultados en Vivo</title>
+    <title>Maestro Tarot | Predicciones Deportivas</title>
     <style>
-        body { background-color: #0b0b1a; color: white; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 0; margin: 0; }
-        .banner-publi { background: #16213e; border: 1px dashed gold; padding: 10px; margin: 10px auto; max-width: 90%; border-radius: 8px; font-size: 12px; }
-        .seccion { background: #1a1a2e; padding: 15px; border-radius: 15px; max-width: 700px; margin: 15px auto; border: 1px solid #333; box-shadow: 0px 4px 15px rgba(0,0,0,0.5); }
-        h1 { color: gold; font-size: 1.5rem; margin-top: 15px; }
-        h3 { color: #00d4ff; border-bottom: 1px solid #333; padding-bottom: 5px; }
-        .card-container { display: flex; justify-content: center; gap: 8px; margin: 15px 0; }
-        .card { width: 60px; height: 90px; background: #2a2a4a; border: 2px solid gold; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 20px; transition: 0.3s; }
-        .card:hover { transform: scale(1.05); background: #35355e; }
-        button { background: gold; color: black; border: none; padding: 12px 25px; font-weight: bold; cursor: pointer; border-radius: 5px; width: 80%; }
-        input { padding: 12px; border-radius: 5px; border: none; width: 70%; margin-bottom: 10px; }
-        footer { font-size: 11px; color: #555; margin: 30px 0; padding-bottom: 20px; }
+        body { background-color: #0b0b1a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding: 0; }
+        .header { background: linear-gradient(to bottom, #1a1a2e, #0b0b1a); padding: 20px; border-bottom: 2px solid gold; }
+        .seccion { background: #16213e; padding: 15px; border-radius: 15px; max-width: 800px; margin: 20px auto; border: 1px solid #333; }
+        h2 { color: gold; text-transform: uppercase; font-size: 1.2rem; }
+        
+        /* Estilo para las cartas */
+        .card-container { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
+        .card { width: 80px; height: 130px; background: #2a2a4a; border: 2px solid gold; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 30px; transition: 0.4s; }
+        .card:hover { transform: translateY(-10px) rotate(2deg); box-shadow: 0 0 15px gold; }
+        
+        #resultado-tarot { background: #0f3460; padding: 15px; border-radius: 10px; margin-top: 10px; display: none; border: 1px solid gold; color: #fff; font-weight: bold; }
+        iframe { border-radius: 10px; background: white; }
     </style>
 </head>
 <body>
 
-    <h1>🔮 MAESTRO TAROT</h1>
-
-    <div class="banner-publi">
-        ✨ ESPACIO PUBLICITARIO DISPONIBLE ✨
+    <div class="header">
+        <h1>🔮 MAESTRO TAROT</h1>
+        <p>Predicciones de Fútbol y Numerología Sagrada</p>
     </div>
-    
+
     <div class="seccion">
-        <h3>⚽ MARCADORES EN DIRECTO</h3>
+        <h2>⚽ 1. Elige tu Partido de Hoy</h2>
+        <p><small>Busca tu equipo en el panel de abajo</small></p>
         <iframe src="https://www.scorebat.com/embed/livescore/?token=MTc5Mzc3XzE3MzcwMzg1NDZfNmEwZDU1NDExZjdmOWRiYTMwYmE2NmRhNzQ0ZDI5Zjk=" 
-        frameborder="0" width="100%" height="500" allowfullscreen allow='autoplay; fullscreen' 
-        style="width:100%; height:500px; border-radius: 10px;"></iframe>
+        frameborder="0" width="100%" height="500" class="scorebat-bt"></iframe>
     </div>
 
     <div class="seccion">
-        <h3>🔢 NUMEROLOGÍA DE HOY</h3>
-        <p>Introduce tu fecha para conocer tu vibración:</p>
-        <input type="date" id="fechaNacimiento">
-        <br>
-        <button onclick="calcNum()">CALCULAR NÚMERO</button>
-        <div id="res" style="margin-top:15px; color:gold; font-size: 1.2rem; font-weight:bold;"></div>
-    </div>
-
-    <div class="seccion">
-        <h3>🃏 TIRADA RÁPIDA (78 CARTAS)</h3>
+        <h2>🃏 2. Pregunta al Tarot por el Resultado</h2>
+        <p>Concentrate en el equipo que quieres consultar y elige una carta:</p>
         <div class="card-container">
-            <div class="card" onclick="alert('La carta del Pasado: Revelación inminente.')">?</div>
-            <div class="card" onclick="alert('La carta del Presente: Momento de actuar con cautela.')">?</div>
-            <div class="card" onclick="alert('La carta del Futuro: Éxito en lo profesional.')">?</div>
+            <div class="card" onclick="revelarSuerte('Victoria local')">?</div>
+            <div class="card" onclick="revelarSuerte('Empate técnico')">?</div>
+            <div class="card" onclick="revelarSuerte('Victoria visitante')">?</div>
         </div>
-        <small>Haz clic en las cartas para una lectura rápida</small>
+        <div id="resultado-tarot"></div>
     </div>
 
-    <footer>
-        <p>© 2026 MaestroTarot.com | Corazón Fuerte</p>
-        <p>Contacto: corazonfuerte@gmx.es</p>
-    </footer>
+    <div class="seccion">
+        <h2>🔢 3. Tu Vibración Numérica</h2>
+        <input type="date" id="fecha" style="padding:10px; border-radius:5px;">
+        <button onclick="calc()" style="padding:10px; background:gold; border:none; font-weight:bold; cursor:pointer;">CONSULTAR</button>
+        <p id="res-num" style="color:gold; font-size:1.2rem;"></p>
+    </div>
 
     <script>
-        function calcNum() {
-            const f = document.getElementById('fechaNacimiento').value;
+        function revelarSuerte(mensaje) {
+            const div = document.getElementById('resultado-tarot');
+            const predicciones = [
+                "Los astros indican una energía de victoria clara.",
+                "Cuidado: El Ermitaño sugiere un partido cerrado y pocos goles.",
+                "La Rueda de la Fortuna favorece al equipo visitante en el último minuto.",
+                "El Colgado indica un empate sufrido.",
+                "La Fuerza está con el equipo local, no habrá quien los pare."
+            ];
+            const random = predicciones[Math.floor(Math.random() * predicciones.length)];
+            div.style.display = "block";
+            div.innerHTML = "✨ PREDICCIÓN: " + random;
+        }
+
+        function calc() {
+            const f = document.getElementById('fecha').value;
             if(!f) return;
             let s = f.replace(/-/g, '').split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
             while(s > 9 && s !== 11 && s !== 22) s = s.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
-            document.getElementById('res').innerHTML = "TU NÚMERO MAESTRO ES: " + s;
+            document.getElementById('res-num').innerHTML = "TU NÚMERO DE PODER HOY ES EL " + s;
         }
     </script>
 </body>
