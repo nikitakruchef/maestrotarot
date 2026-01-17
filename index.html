@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="coinzilla" content="876e6032c5174633e8f3eef3d3df0f9e" />
+    <title>Maestro Tarot | Resultados y Numerología</title>
+    <style>
+        body { background-color: #0b0b1a; color: white; font-family: sans-serif; text-align: center; padding: 10px; margin: 0; }
+        .banner-publi { background: linear-gradient(45deg, #1a1a2e, #16213e); border: 1px dashed gold; padding: 15px; margin: 20px auto; max-width: 728px; border-radius: 8px; }
+        .seccion { background: #16213e; padding: 20px; border-radius: 15px; max-width: 600px; margin: 20px auto; border: 1px solid #333; }
+        .card-container { display: flex; justify-content: center; gap: 10px; margin: 20px 0; flex-wrap: wrap; }
+        .card { width: 70px; height: 110px; background: #2a2a4a; border: 2px solid gold; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 24px; }
+        button { background: gold; color: black; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; border-radius: 5px; }
+        footer { font-size: 12px; color: #666; margin: 40px 0; }
+    </style>
+</head>
+<body>
+
+    <div class="banner-publi">
+        <small>PUBLICIDAD</small><br>
+        ✨ ESPACIO RESERVADO ✨
+    </div>
+
+    <h1>🔮 MAESTRO TAROT</h1>
+    
+    <div class="seccion">
+        <h3>Lectura de 78 Cartas</h3>
+        <div class="card-container">
+            <div class="card" onclick="alert('Consulta privada requerida')">?</div>
+            <div class="card" onclick="alert('Consulta privada requerida')">?</div>
+            <div class="card" onclick="alert('Consulta privada requerida')">?</div>
+        </div>
+    </div>
+
+    <div class="seccion">
+        <h3>⚽ MARCADORES EN VIVO</h3>
+        <iframe src="https://www.livescore.cz/livescore.php?id=1&bg=16213e&font=ffffff&link=gold" width="100%" height="400" frameborder="0"></iframe>
+    </div>
+
+    <div class="seccion">
+        <h3>🔢 NUMEROLOGÍA</h3>
+        <input type="date" id="fechaNacimiento" style="padding:10px; width:70%;">
+        <br><br>
+        <button onclick="calcNum()">CALCULAR</button>
+        <div id="res" style="margin-top:15px; color:gold; font-weight:bold;"></div>
+    </div>
+
+    <footer>
+        <p>© 2026 MaestroTarot.com | <a href="#" style="color:#888;">Legal</a></p>
+        <p>Contacto: corazonfuerte@gmx.es</p>
+    </footer>
+
+    <script>
+        function calcNum() {
+            const f = document.getElementById('fechaNacimiento').value;
+            if(!f) return;
+            let s = f.replace(/-/g, '').split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+            while(s > 9 && s !== 11 && s !== 22) s = s.toString().split('').reduce((a, b) => parseInt(a) + parseInt(b), 0);
+            document.getElementById('res').innerHTML = "NÚMERO DE VIDA: " + s;
+        }
+    </script>
+</body>
+</html>
