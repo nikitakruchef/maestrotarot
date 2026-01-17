@@ -4,16 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="coinzilla" content="876e6032c5174633e8f3eef3d3df0f9e" />
-    <title>Maestro Tarot | Oráculo Deportivo</title>
+    <title>Maestro Tarot | Oráculo de Partidos</title>
     <style>
         body { background-color: #0b0b1a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding: 0; }
-        .seccion { background: #16213e; padding: 15px; border-radius: 15px; max-width: 900px; margin: 20px auto; border: 1px solid gold; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
-        h1 { color: gold; padding: 20px; text-shadow: 2px 2px 5px black; font-size: 2.5rem; }
+        .seccion { background: #16213e; padding: 15px; border-radius: 15px; max-width: 850px; margin: 20px auto; border: 1px solid gold; box-shadow: 0 0 20px rgba(0,0,0,0.5); }
+        h1 { color: gold; padding: 20px; text-shadow: 2px 2px 5px black; }
+        input { padding: 12px; width: 80%; border-radius: 5px; border: 1px solid gold; background: #0b0b1a; color: white; font-size: 1rem; margin: 10px 0; }
         .card-container { display: flex; justify-content: center; gap: 15px; margin: 20px 0; }
-        .card { width: 85px; height: 130px; background: #2a2a4a; border: 2px solid gold; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 40px; transition: 0.4s; position: relative; }
-        .card:hover { transform: scale(1.1) rotate(3deg); box-shadow: 0 0 20px gold; background: #35355e; }
-        #resultado { margin-top: 25px; padding: 20px; border-radius: 10px; background: #0f3460; border: 1px dashed gold; color: gold; font-size: 1.4rem; font-weight: bold; min-height: 80px; display: none; }
-        .futbol-wrapper { border-radius: 10px; overflow: hidden; background: #fff; }
+        .card { width: 80px; height: 125px; background: #2a2a4a; border: 2px solid gold; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 40px; transition: 0.4s; }
+        .card:hover { transform: translateY(-10px); box-shadow: 0 0 20px gold; }
+        #resultado { margin: 20px; padding: 20px; border-radius: 10px; background: #0f3460; border: 1px dashed gold; color: gold; font-size: 1.4rem; font-weight: bold; display: none; }
+        iframe { border-radius: 10px; background: white; margin-bottom: 10px; }
     </style>
 </head>
 <body>
@@ -21,17 +22,17 @@
     <h1>🔮 MAESTRO TAROT</h1>
 
     <div class="seccion">
-        <h2 style="color: gold;">⚽ 1. SELECCIONA TU PARTIDO</h2>
-        <p>Busca en el panel el partido de Champions, Liga o Copa que quieres consultar:</p>
-        <div class="futbol-wrapper">
-            <iframe src="https://scoreboard.broadage.com/widgets/soccer/scoreboard?apiKey=25103a89-0822-4809-9b93-b9d97034c764&colorTheme=light&language=es" 
-            width="100%" height="600" frameborder="0"></iframe>
-        </div>
+        <h2 style="color: gold;">⚽ 1. MIRA LOS PARTIDOS DE HOY</h2>
+        <p>Consulta aquí la Champions, La Liga o la Copa:</p>
+        <iframe src="https://www.livescore.in/es/free/widgets/live/?type=event&category=soccer&league=all&width=100%&height=500&color_0=16213e&color_1=ffffff&color_2=gold&color_3=333333&color_4=eeeeee" 
+        width="100%" height="500" frameborder="0"></iframe>
     </div>
 
     <div class="seccion">
-        <h2 style="color: gold;">🃏 2. PIDE LA PREDICCIÓN AL ORÁCULO</h2>
-        <p>Concéntrate en el equipo que has elegido arriba y selecciona una carta:</p>
+        <h2 style="color: gold;">🃏 2. ESCRIBE EL PARTIDO O EQUIPO</h2>
+        <input type="text" id="partidoElegido" placeholder="Ej: Real Madrid vs City o tu equipo favorito...">
+        
+        <p>Concentrate en tu elección y pulsa una carta:</p>
         <div class="card-container">
             <div class="card" onclick="revelar()">?</div>
             <div class="card" onclick="revelar()">?</div>
@@ -42,19 +43,26 @@
 
     <script>
         function revelar() {
+            const partido = document.getElementById('partidoElegido').value;
+            if (partido === "") {
+                alert("Por favor, escribe el nombre del partido o tu equipo primero.");
+                return;
+            }
+
             const predicciones = [
-                "🃏 EL SOL: ¡Victoria contundente! El equipo por el que preguntas dominará con luz propia.",
-                "🃏 LA TORRE: ¡Desastre inminente! Una tarjeta roja o un error grave arruinará el partido.",
-                "🃏 EL CARRO: Victoria sufrida. El equipo ganará avanzando con fuerza en el último tramo.",
-                "🃏 EL COLGADO: Las energías están bloqueadas. El empate parece inevitable.",
-                "🃏 EL MAGO: Una genialidad individual (un golazo de falta o regate) decidirá los tres puntos.",
-                "🃏 LA RUEDA DE LA FORTUNA: El destino es caprichoso. Habrá un gol de rebote o fortuna.",
-                "🃏 EL JUICIO: El VAR o un penalti de última hora será el protagonista absoluto."
+                "🃏 EL SOL: ¡Victoria brillante! " + partido + " dominará el campo con una energía imparable.",
+                "🃏 LA TORRE: ¡Cuidado! Un suceso inesperado (lesión o roja) hundirá las esperanzas en el partido de " + partido + ".",
+                "🃏 EL CARRO: Éxito total. " + partido + " avanzará con determinación hacia la victoria final.",
+                "🃏 EL COLGADO: Las fuerzas están igualadas. El destino de " + partido + " es un empate muy sufrido.",
+                "🃏 EL MAGO: Una genialidad táctica o un golazo individual decidirá el destino de " + partido + ".",
+                "🃏 LA LUNA: Mucha confusión y polémica arbitral rodeará el resultado de " + partido + ".",
+                "🃏 LA RUEDA DE LA FORTUNA: El azar será clave. Un gol de rebote dará la victoria en " + partido + "."
             ];
+
             const random = predicciones[Math.floor(Math.random() * predicciones.length)];
             const resDiv = document.getElementById('resultado');
             resDiv.style.display = "block";
-            resDiv.innerHTML = random;
+            resDiv.innerHTML = "✨ EL ORÁCULO PREDICE PARA:<br><br>" + random;
             resDiv.scrollIntoView({behavior: "smooth"});
         }
     </script>
