@@ -3,76 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="coinzilla" content="876e6032c5174633e8f3eef3d3df0f9e" />
-    <title>Maestro Tarot | Élite Profesional</title>
+    <title>Tarot Maestro | Élite</title>
     <style>
-        body { background-color: #0b0b1a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding-bottom: 80px; }
-        .header { background: linear-gradient(to bottom, #1a1a2e, #0b0b1a); padding: 25px; border-bottom: 3px solid gold; }
-        .seccion { background: #16213e; padding: 20px; border-radius: 15px; max-width: 900px; margin: 20px auto; border: 1px solid #333; }
-        .ad-slot { background: rgba(255,255,255,0.05); border: 1px dashed gold; margin: 15px auto; min-height: 90px; max-width: 728px; display: flex; align-items: center; justify-content: center; color: #555; font-size: 12px; }
-        select { padding: 12px; width: 90%; border-radius: 8px; background: #0b0b1a; color: gold; border: 1px solid gold; font-size: 1.1rem; margin-bottom: 20px; }
-        .grid-partidos { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
-        .btn-partido { background: #1a1a2e; color: #ccc; border: 1px solid #444; padding: 12px; border-radius: 8px; cursor: pointer; }
-        .btn-partido.active { background: gold; color: black; font-weight: bold; }
-        .btn-magico { background: linear-gradient(gold, #ccaa00); color: black; font-weight: bold; padding: 18px 35px; border: none; border-radius: 50px; font-size: 1.2rem; cursor: pointer; margin: 20px 0; box-shadow: 0 0 15px gold; display: none; text-transform: uppercase; }
-        .zona-resultado { display: none; margin-top: 30px; animation: fadeIn 0.8s; border-top: 1px solid gold; padding-top: 20px; }
-        .card-container { display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
-        .card-img { width: 100px; height: 170px; background-size: cover; border: 2px solid gold; border-radius: 8px; background-position: center; }
-        .res-texto { padding: 20px; border-radius: 10px; background: #0f3460; border: 2px solid gold; color: gold; font-size: 1.3rem; font-weight: bold; max-width: 600px; margin: 20px auto; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        body { background: #0b0b1a; color: white; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
+        .seccion { background: #16213e; padding: 20px; border-radius: 15px; max-width: 800px; margin: 20px auto; border: 1px solid gold; }
+        .ad-slot { background: rgba(255,255,255,0.1); border: 1px dashed gold; margin: 10px auto; padding: 10px; max-width: 728px; color: #777; }
+        select { padding: 10px; width: 80%; margin-bottom: 20px; background: #000; color: gold; border: 1px solid gold; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+        .btn-p { background: #1a1a2e; color: white; border: 1px solid #444; padding: 10px; cursor: pointer; border-radius: 5px; }
+        .btn-p.active { background: gold; color: black; font-weight: bold; }
+        .btn-run { background: gold; color: black; padding: 15px 30px; border: none; border-radius: 20px; font-weight: bold; cursor: pointer; display: none; margin: 20px auto; }
+        .resultado { display: none; margin-top: 20px; border-top: 2px solid gold; padding-top: 20px; }
+        .cartas { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .c-img { width: 90px; height: 150px; background-size: cover; border: 2px solid gold; border-radius: 5px; }
+        .txt { margin-top: 15px; font-size: 1.2rem; color: gold; font-weight: bold; background: rgba(0,0,0,0.3); padding: 15px; border-radius: 10px; }
     </style>
 </head>
 <body>
-    <div class="header"><h1>🔮 MAESTRO TAROT</h1></div>
-    <div class="ad-slot" id="ad-top"><p>PUBLICIDAD SUPERIOR</p></div>
-    
+
+    <h1>🔮 MAESTRO TAROT</h1>
+    <div class="ad-slot">PUBLICIDAD SUPERIOR</div>
+
     <div class="seccion">
-        <h2>⚽ ELIGE TU PARTIDO</h2>
-        <select id="selectorJ" onchange="cargarP()">
-            <option value="">-- Elige Jornada --</option>
+        <h2>⚽ PREDICCIÓN DEPORTIVA</h2>
+        <select id="selJ" onchange="listP()">
+            <option value="">-- Selecciona Jornada --</option>
             <option value="j21">Jornada 21</option>
             <option value="j22">Jornada 22</option>
             <option value="j23">Jornada 23</option>
+            <option value="j24">Jornada 24</option>
+            <option value="j25">Jornada 25</option>
+            <option value="j26">Jornada 26</option>
         </select>
-        <div id="contPartidos" class="grid-partidos"></div>
-        <button id="btn-run-dep" class="btn-magico" onclick="tirada('dep')">Consultar Fútbol</button>
+        <div id="lista" class="grid"></div>
+        <button id="btnD" class="btn-run" onclick="tirar('dep')">VER PREDICCIÓN FÚTBOL</button>
+        <div id="res-dep" class="resultado">
+            <div class="cartas"><div id="d1" class="c-img"></div><div id="d2" class="c-img"></div><div id="d3" class="c-img"></div></div>
+            <div id="txtD" class="txt"></div>
+        </div>
     </div>
 
-    <div id="res-dep" class="zona-resultado seccion">
-        <div class="card-container"><div id="d-c1" class="card-img"></div><div id="d-c2" class="card-img"></div><div id="d-c3" class="card-img"></div></div>
-        <div id="t-dep" class="res-texto"></div>
-    </div>
-
-    <div class="ad-slot" id="ad-middle"><p>PUBLICIDAD INTERMEDIA</p></div>
+    <div class="ad-slot">PUBLICIDAD INTERMEDIA</div>
 
     <div class="seccion" style="border-color: #00ffcc;">
-        <h2 style="color: #00ffcc;">🌟 TAROT PROFESIONAL PERSONAL</h2>
-        <button id="btn-run-pers" class="btn-magico" style="display:inline-block; background:#00ffcc;" onclick="tirada('pers')">Tirada Profesional Personal</button>
-    </div>
-
-    <div id="res-pers" class="zona-resultado seccion" style="border-color: #00ffcc;">
-        <div class="card-container"><div id="p-c1" class="card-img"></div><div id="p-c2" class="card-img"></div><div id="p-c3" class="card-img"></div></div>
-        <div id="t-pers" class="res-texto" style="color:#00ffcc; border-color:#00ffcc;"></div>
+        <h2 style="color: #00ffcc;">🌟 TAROT PERSONAL</h2>
+        <button style="display:block; background:#00ffcc; margin: 10px auto;" class="btn-run" id="btnP" onclick="tirar('per')">TIRADA PROFESIONAL</button>
+        <div id="res-per" class="resultado">
+            <div class="cartas"><div id="p1" class="c-img"></div><div id="p2" class="c-img"></div><div id="p3" class="c-img"></div></div>
+            <div id="txtP" class="txt" style="color:#00ffcc;"></div>
+        </div>
     </div>
 
     <script>
-        const partidos = {
-            j21: ["Levante vs Elche", "Rayo vs Osasuna", "Valencia vs Espanyol", "Sevilla vs Athletic", "Villarreal vs Real Madrid", "Barcelona vs Oviedo"],
-            j22: ["Espanyol vs Alavés", "Oviedo vs Girona", "Osasuna vs Villarreal", "Levante vs Atlético", "Real Madrid vs Rayo"],
-            j23: ["Alavés vs Getafe", "Athletic vs Levante", "Atlético vs Betis", "Barcelona vs Mallorca"]
+        const datos = {
+            j21: ["Levante-Elche", "Rayo-Osasuna", "Valencia-Espanyol", "Sevilla-Athletic", "Villarreal-R.Madrid", "Barça-Oviedo"],
+            j22: ["Espanyol-Alavés", "Oviedo-Girona", "Osasuna-Villarreal", "R.Madrid-Rayo", "Betis-Valencia", "Getafe-Celta"],
+            j23: ["Alavés-Getafe", "Athletic-Levante", "Atlético-Betis", "Barça-Mallorca", "Celta-Osasuna", "Sevilla-Girona"],
+            j24: ["Elche-Osasuna", "Espanyol-Celta", "Girona-Barça", "Levante-Valencia", "Madrid-Sociedad", "Sevilla-Alavés"],
+            j25: ["Alavés-Girona", "Athletic-Elche", "Atlético-Espanyol", "Barça-Levante", "Osasuna-Madrid", "Villarreal-Valencia"],
+            j26: ["Barça-Villarreal", "Elche-Espanyol", "Girona-Celta", "Levante-Alavés", "Madrid-Getafe", "Valencia-Osasuna"]
         };
 
-        const mazo78 = [
-            {n: "El Mago", i: "https://www.trustedtarot.com/img/cards/the-magician.png", m: "Tienes el poder de crear tu realidad ahora mismo."},
-            {n: "La Sacerdotisa", i: "https://www.trustedtarot.com/img/cards/the-high-priestess.png", m: "Escucha tu intuición, hay secretos que se revelarán pronto."},
-            {n: "La Emperatriz", i: "https://www.trustedtarot.com/img/cards/the-empress.png", m: "Periodo de abundancia y creatividad desbordante."},
-            {n: "El Emperador", i: "https://www.trustedtarot.com/img/cards/the-emperor.png", m: "Es momento de poner orden y tomar el control de tu vida."},
-            {n: "El Papa", i: "https://www.trustedtarot.com/img/cards/the-hierophant.png", m: "Busca consejo en personas sabias o tradiciones antiguas."},
-            {n: "Los Enamorados", i: "https://www.trustedtarot.com/img/cards/the-lovers.png", m: "Una decisión importante en el amor o socios se acerca."},
-            {n: "El Carro", i: "https://www.trustedtarot.com/img/cards/the-chariot.png", m: "Victoria y avance rápido hacia tus metas."},
-            {n: "La Justicia", i: "https://www.trustedtarot.com/img/cards/justice.png", m: "Recibirás lo que mereces; el equilibrio se restablece."},
-            {n: "El Ermitaño", i: "https://www.trustedtarot.com/img/cards/the-hermit.png", m: "Busca la respuesta en tu interior, no en los demás."},
-            {n: "La Rueda de la Fortuna", i: "https://www.trustedtarot.com/img/cards/the-wheel-of-fortune.png", m: "Un cambio de suerte inesperado está por ocurrir."},
-            {n: "La Fuerza", i: "https://www.trustedtarot.com/img/cards/strength.png", m: "Domina tus miedos con suavidad y coraje."},
-            {n: "El Colgado", i: "https://www.trustedtarot.com/img/cards/the-hanged-man.png", m: "Es necesario ver las cosas desde otra perspectiva."},
-            {n: "
+        const mazo = [
+            {n:"El Mago", i:"the-magician.png", t:"Nuevos comienzos exitosos."},
+            {n:"El Sol", i:"the-sun.png", t:"Felicidad y claridad total."},
+            {n:"La Torre", i:"the-tower.png", t:"Cambio repentino necesario."},
+            {n:"El Mundo", i:"the-world.png", t:"Ciclo completado con éxito."},
+            {n:"La Luna", i:"the-moon.png", t:"Cuidado con lo que no ves."},
+            {n:"El Diablo", i:"the-devil.png", t:"Ataduras que debes romper."},
+            {n:"Los Enamorados", i:"the-lovers.png", t:"Decisión importante de corazón."}
+        ];
+
+        let selP = "";
+        function listP() {
+            const j = document.getElementById('selJ').value;
+            const l = document.getElementById('lista');
+            l.innerHTML = ""; document.getElementById('btnD').style.display = "none";
+            if(!j) return;
+            datos[j].forEach(p => {
+                const b = document.createElement('button');
+                b.className = 'btn-p'; b.innerText = p;
+                b.onclick = () => { 
+                    document.querySelectorAll('.btn-p').forEach(x => x.classList.remove('active'));
+                    b.classList.add('active'); selP = p; 
+                    document.getElementById('btnD').style.display = "block";
+                };
+                l.appendChild(b);
+            });
+        }
+
+        // Mostrar botón de tarot personal siempre
+        document.getElementById('btnP').style.display = "block";
+
+        function tirar(tipo) {
+            let b = [...mazo].sort(() => Math.random() - 0.5);
+            for(let i=1; i<=3; i++) {
+                document.getElementById(tipo[0]+i).style.backgroundImage = `url('https://www.trustedtarot.com/img/cards/${b[i-1].i}')`;
+            }
+            document.getElementById('res-'+tipo).style.display = "block";
+            if(tipo === 'dep') {
+                const f = ["Gana Local", "Empate Técnico", "Gana Visitante"];
+                document.getElementById('txtD').innerText = selP + ": " + f[Math.floor(Math.random()*3)];
+            } else {
+                document.getElementById('txtP').innerText = "Tu carta: " + b[0].n + ". " + b[0].t;
+            }
+            window.scrollTo(0, document.body.scrollHeight);
+        }
+    </script>
+</body>
+</html>
