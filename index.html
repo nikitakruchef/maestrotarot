@@ -3,147 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maestro Tarot | Élite Deportivo y Personal</title>
+    <meta name="coinzilla" content="876e6032c5174633e8f3eef3d3df0f9e" />
+    <title>Maestro Tarot | Élite Profesional</title>
     <style>
         body { background-color: #0b0b1a; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding-bottom: 80px; }
-        .header { background: linear-gradient(to bottom, #1a1a2e, #0b0b1a); padding: 30px; border-bottom: 3px solid gold; }
-        .seccion { background: #16213e; padding: 25px; border-radius: 15px; max-width: 900px; margin: 25px auto; border: 1px solid #333; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h2 { color: gold; text-transform: uppercase; letter-spacing: 2px; }
-        
-        select { padding: 15px; width: 85%; border-radius: 10px; background: #0b0b1a; color: gold; border: 2px solid gold; font-size: 1.2rem; margin-bottom: 25px; cursor: pointer; }
-        
-        .grid-partidos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 20px 0; }
-        .btn-partido { background: #1a1a2e; color: #aaa; border: 1px solid #444; padding: 15px; border-radius: 10px; cursor: pointer; transition: 0.3s; font-size: 0.95rem; }
-        .btn-partido:hover { border-color: gold; color: white; }
-        .btn-partido.active { background: gold; color: black; font-weight: bold; border-color: white; transform: scale(1.05); }
-
-        .btn-magico { 
-            background: linear-gradient(#ffdf00, #d4af37); color: black; font-weight: bold; 
-            padding: 20px 50px; border: none; border-radius: 50px; font-size: 1.3rem; 
-            cursor: pointer; margin: 30px 0; display: none; box-shadow: 0 0 25px gold;
-            text-transform: uppercase; letter-spacing: 2px;
-        }
-
-        .zona-resultado { display: none; margin-top: 40px; border-top: 2px solid gold; padding-top: 40px; animation: aparece 0.8s ease-out; }
-        .contenedor-cartas { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
-        .carta-revelada { width: 120px; height: 200px; background-size: cover; border: 3px solid gold; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.6); }
-        
-        .caja-texto { padding: 30px; border-radius: 15px; background: #0f3460; border: 2px solid gold; color: gold; font-size: 1.4rem; font-weight: bold; max-width: 700px; margin: 0 auto; line-height: 1.4; }
-
-        @keyframes aparece { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        hr { border: 0; height: 2px; background: gold; margin: 60px auto; width: 80%; opacity: 0.5; }
+        .header { background: linear-gradient(to bottom, #1a1a2e, #0b0b1a); padding: 25px; border-bottom: 3px solid gold; }
+        .seccion { background: #16213e; padding: 20px; border-radius: 15px; max-width: 900px; margin: 20px auto; border: 1px solid #333; }
+        .ad-slot { background: rgba(255,255,255,0.05); border: 1px dashed gold; margin: 15px auto; min-height: 90px; max-width: 728px; display: flex; align-items: center; justify-content: center; color: #555; font-size: 12px; }
+        select { padding: 12px; width: 90%; border-radius: 8px; background: #0b0b1a; color: gold; border: 1px solid gold; font-size: 1.1rem; margin-bottom: 20px; }
+        .grid-partidos { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+        .btn-partido { background: #1a1a2e; color: #ccc; border: 1px solid #444; padding: 12px; border-radius: 8px; cursor: pointer; }
+        .btn-partido.active { background: gold; color: black; font-weight: bold; }
+        .btn-magico { background: linear-gradient(gold, #ccaa00); color: black; font-weight: bold; padding: 18px 35px; border: none; border-radius: 50px; font-size: 1.2rem; cursor: pointer; margin: 20px 0; box-shadow: 0 0 15px gold; display: none; text-transform: uppercase; }
+        .zona-resultado { display: none; margin-top: 30px; animation: fadeIn 0.8s; border-top: 1px solid gold; padding-top: 20px; }
+        .card-container { display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
+        .card-img { width: 100px; height: 170px; background-size: cover; border: 2px solid gold; border-radius: 8px; }
+        .res-texto { padding: 20px; border-radius: 10px; background: #0f3460; border: 2px solid gold; color: gold; font-size: 1.3rem; font-weight: bold; max-width: 600px; margin: 20px auto; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
-
-    <div class="header">
-        <h1>🔮 MAESTRO TAROT</h1>
-        <p>Oráculo Profesional de 78 Cartas</p>
-    </div>
-
+    <div class="header"><h1>🔮 MAESTRO TAROT</h1></div>
+    <div class="ad-slot" id="ad-top"><p>PUBLICIDAD SUPERIOR (Pegar código Coinzilla aquí)</p></div>
     <div class="seccion">
-        <h2>⚽ CONSULTA TU PARTIDO</h2>
-        <select id="selJornada" onchange="cargarPartidos()">
-            <option value="">-- Elige la Jornada --</option>
+        <h2>⚽ ELIGE TU PARTIDO</h2>
+        <select id="selectorJ" onchange="cargarP()">
+            <option value="">-- Elige Jornada --</option>
             <option value="j21">Jornada 21</option>
             <option value="j22">Jornada 22</option>
             <option value="j23">Jornada 23</option>
-            <option value="j24">Jornada 24</option>
-            <option value="j25">Jornada 25</option>
-            <option value="j26">Jornada 26</option>
         </select>
-
-        <div id="gridPartidos" class="grid-partidos"></div>
-        <button id="btn-dep" class="btn-magico" onclick="revelar('dep')">REVELAR DESTINO DEL PARTIDO</button>
-
-        <div id="res-dep" class="zona-resultado">
-            <div class="contenedor-cartas">
-                <div id="card-dep-1" class="carta-revelada"></div>
-                <div id="card-dep-2" class="carta-revelada"></div>
-                <div id="card-dep-3" class="carta-revelada"></div>
-            </div>
-            <div id="txt-dep" class="caja-texto"></div>
-        </div>
+        <div id="contPartidos" class="grid-partidos"></div>
+        <button id="btn-run-dep" class="btn-magico" onclick="tirada('dep')">Consultar Fútbol</button>
     </div>
-
-    <hr>
-
+    <div id="res-dep" class="zona-resultado seccion">
+        <div class="card-container"><div id="d-c1" class="card-img"></div><div id="d-c2" class="card-img"></div><div id="d-c3" class="card-img"></div></div>
+        <div id="t-dep" class="res-texto"></div>
+    </div>
+    <div class="ad-slot" id="ad-middle"><p>PUBLICIDAD INTERMEDIA</p></div>
     <div class="seccion" style="border-color: #00ffcc;">
-        <h2 style="color: #00ffcc;">🌟 TAROT PROFESIONAL PERSONAL</h2>
-        <p>Realiza una tirada completa sobre tu futuro (Amor, Dinero, Salud)</p>
-        <button id="btn-pers" class="btn-magico" style="display:inline-block; background: #00ffcc; box-shadow: 0 0 20px #00ffcc;" onclick="revelar('pers')">REALIZAR TIRADA PERSONAL</button>
-
-        <div id="res-pers" class="zona-resultado">
-            <div class="contenedor-cartas">
-                <div id="card-pers-1" class="carta-revelada" style="border-color:#00ffcc;"></div>
-                <div id="card-pers-2" class="carta-revelada" style="border-color:#00ffcc;"></div>
-                <div id="card-pers-3" class="carta-revelada" style="border-color:#00ffcc;"></div>
-            </div>
-            <div id="txt-pers" class="caja-texto" style="border-color:#00ffcc; color:#00ffcc;"></div>
-        </div>
+        <h2 style="color: #00ffcc;">🌟 TAROT PERSONAL</h2>
+        <button id="btn-run-pers" class="btn-magico" style="display:inline-block; background:#00ffcc;" onclick="tirada('pers')">Tirada Profesional Personal</button>
     </div>
-
+    <div id="res-pers" class="zona-resultado seccion" style="border-color: #00ffcc;">
+        <div class="card-container"><div id="p-c1" class="card-img"></div><div id="p-c2" class="card-img"></div><div id="p-c3" class="card-img"></div></div>
+        <div id="t-pers" class="res-texto" style="color:#00ffcc; border-color:#00ffcc;"></div>
+    </div>
     <script>
-        const ligaCompleta = {
-            j21: ["Levante vs Elche", "Rayo vs Osasuna", "Valencia vs Espanyol", "Sevilla vs Athletic", "Villarreal vs Real Madrid", "Atlético vs Mallorca", "Barcelona vs Oviedo", "R. Sociedad vs Celta", "Alavés vs Betis", "Girona vs Getafe"],
-            j22: ["Espanyol vs Alavés", "Oviedo vs Girona", "Osasuna vs Villarreal", "Levante vs Atlético", "Elche vs Barcelona", "Real Madrid vs Rayo", "Betis vs Valencia", "Getafe vs Celta", "Athletic vs R. Sociedad", "Mallorca vs Sevilla"],
-            j23: ["Alavés vs Getafe", "Athletic vs Levante", "Atlético vs Betis", "Barcelona vs Mallorca", "Celta vs Osasuna", "Rayo vs Oviedo", "R. Sociedad vs Elche", "Sevilla vs Girona", "Valencia vs Real Madrid", "Villarreal vs Espanyol"],
-            j24: ["Elche vs Osasuna", "Espanyol vs Celta", "Getafe vs Villarreal", "Girona vs Barcelona", "Levante vs Valencia", "Mallorca vs Betis", "Rayo vs Atlético", "Real Madrid vs R. Sociedad", "Oviedo vs Athletic", "Sevilla vs Alavés"],
-            j25: ["Alavés vs Girona", "Athletic vs Elche", "Atlético vs Espanyol", "Barcelona vs Levante", "Celta vs Mallorca", "Getafe vs Sevilla", "Osasuna vs Real Madrid", "Betis vs Rayo", "R. Sociedad vs Oviedo", "Villarreal vs Valencia"],
-            j26: ["Barcelona vs Villarreal", "Elche vs Espanyol", "Girona vs Celta", "Levante vs Alavés", "Mallorca vs R. Sociedad", "Rayo vs Athletic", "Betis vs Sevilla", "Real Madrid vs Getafe", "Oviedo vs Atlético", "Valencia vs Osasuna"]
+        const partidos = {
+            j21: ["Levante vs Elche", "Rayo vs Osasuna", "Valencia vs Espanyol", "Sevilla vs Athletic", "Villarreal vs Real Madrid", "Barcelona vs Oviedo"],
+            j22: ["Espanyol vs Alavés", "Oviedo vs Girona", "Osasuna vs Villarreal", "Levante vs Atlético", "Real Madrid vs Rayo", "Barcelona vs Elche"],
+            j23: ["Alavés vs Getafe", "Athletic vs Levante", "Atlético vs Betis", "Barcelona vs Mallorca"]
         };
-
-        const mazo = [
-            {n: "EL MAGO", i: "https://www.trustedtarot.com/img/cards/the-magician.png"},
-            {n: "EL SOL", i: "https://www.trustedtarot.com/img/cards/the-sun.png"},
-            {n: "LA TORRE", i: "https://www.trustedtarot.com/img/cards/the-tower.png"},
-            {n: "EL CARRO", i: "https://www.trustedtarot.com/img/cards/the-chariot.png"},
-            {n: "LA RUEDA", i: "https://www.trustedtarot.com/img/cards/the-wheel-of-fortune.png"},
-            {n: "LA ESTRELLA", i: "https://www.trustedtarot.com/img/cards/the-star.png"},
-            {n: "EL EMPERADOR", i: "https://www.trustedtarot.com/img/cards/the-emperor.png"},
-            {n: "LA MUERTE", i: "https://www.trustedtarot.com/img/cards/death.png"},
-            {n: "EL MUNDO", i: "https://www.trustedtarot.com/img/cards/the-world.png"}
+        const mazo78 = [
+            {n: "El Mago", i: "https://www.trustedtarot.com/img/cards/the-magician.png"},
+            {n: "La Sacerdotisa", i: "https://www.trustedtarot.com/img/cards/the-high-priestess.png"},
+            {n: "El Sol", i: "https://www.trustedtarot.com/img/cards/the-sun.png"},
+            {n: "La Torre", i: "https://www.trustedtarot.com/img/cards/the-tower.png"},
+            {n: "El Mundo", i: "https://www.trustedtarot.com/img/cards/the-world.png"},
+            {n: "La Estrella", i: "https://www.trustedtarot.com/img/cards/the-star.png"}
         ];
-
         let pSel = "";
-
-        function cargarPartidos() {
-            const j = document.getElementById('selJornada').value;
-            const container = document.getElementById('gridPartidos');
-            container.innerHTML = "";
-            document.getElementById('btn-dep').style.display = "none";
-            document.getElementById('res-dep').style.display = "none";
+        function cargarP() {
+            const j = document.getElementById('selectorJ').value;
+            const c = document.getElementById('contPartidos');
+            c.innerHTML = "";
             if(!j) return;
-
-            ligaCompleta[j].forEach(p => {
+            partidos[j].forEach(p => {
                 const b = document.createElement('button');
-                b.className = 'btn-partido';
-                b.innerText = p;
+                b.className = "btn-partido"; b.innerText = p;
                 b.onclick = (e) => {
-                    document.querySelectorAll('.btn-partido').forEach(btn => btn.classList.remove('active'));
-                    e.target.classList.add('active');
-                    pSel = p;
-                    document.getElementById('btn-dep').style.display = "inline-block";
+                    document.querySelectorAll('.btn-partido').forEach(x => x.classList.remove('active'));
+                    e.target.classList.add('active'); pSel = p;
+                    document.getElementById('btn-run-dep').style.display = "inline-block";
                 };
-                container.appendChild(b);
+                c.appendChild(b);
             });
         }
-
-        function revelar(tipo) {
-            let baraja = [...mazo].sort(() => 0.5 - Math.random());
-            for(let i=1; i<=3; i++) {
-                document.getElementById(`card-${tipo}-${i}`).style.backgroundImage = `url('${baraja[i-1].i}')`;
-            }
-
-            if(tipo === 'dep') {
-                const frases = [`Victoria para el local en ${pSel}.`, `Empate en ${pSel} según ${baraja[0].n}.`, `El visitante ganará en ${pSel}.` ];
-                document.getElementById('txt-dep').innerHTML = "✨ EL ORÁCULO PREDICE:<br>" + frases[Math.floor(Math.random()*frases.length)];
-            } else {
-                document.getElementById('txt-pers').innerHTML = "✨ LECTURA PERSONAL:<br>Pasado: " + baraja[0].n + " | Presente: " + baraja[1].n + " | Futuro: " + baraja[2].n + ". Grandes cambios se avecinan.";
-            }
-
+        function tirada(tipo) {
+            let baraja = [...mazo78].sort(() => Math.random() - 0.5);
+            document.getElementById(`${tipo === 'dep' ? 'd' : 'p'}-c1`).style.backgroundImage = `url('${baraja[0].i}')`;
+            document.getElementById(`${tipo === 'dep' ? 'd' : 'p'}-c2`).style.backgroundImage = `url('${baraja[1].i}')`;
+            document.getElementById(`${tipo === 'dep' ? 'd' : 'p'}-c3`).style.backgroundImage = `url('${baraja[2].i}')`;
             document.getElementById(`res-${tipo}`).style.display = "block";
-            document.getElementById(`res-${tipo}`).scrollIntoView({behavior: "smooth"});
+            if(tipo === 'dep') {
+                const opciones = [`Victoria para el local en ${pSel}.`, `Empate en ${pSel}.`, `El visitante ganará en ${pSel}.`];
+                document.getElementById('t-dep').innerHTML = opciones[Math.floor(Math.random() * opciones.length)];
+            } else {
+                document.getElementById('t-pers').innerHTML = "Tu futuro está marcado por " + baraja[0].n + ". Grandes noticias pronto.";
+            }
+            document.getElementById(`res-${tipo}`).scrollIntoView({behavior: 'smooth'});
         }
     </script>
 </body>
