@@ -1,58 +1,87 @@
-Owner avatar
-maestrotarot
-Public
-nikitakruchef/maestrotarot
-Go to file
-t
-Name		
-nikitakruchef
-nikitakruchef
-Create CNAME
-3033c6d
- · 
-35 minutes ago
-CNAME
-Create CNAME
-35 minutes ago
-index.html
-Update index.html
-38 minutes ago
-Repository files navigation
-README
-Add a README
-Help people interested in this repository understand your project.
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="coinzilla" content="876e6032c5174633e8f3eef3d3df0f9e" />
+    
+    <title>Maestro Tarot | Oráculo y Numerología</title>
+    <style>
+        body { background-color: #0d0d0d; color: white; font-family: 'Segoe UI', sans-serif; text-align: center; margin: 0; padding: 20px; }
+        .caja { border: 2px solid gold; border-radius: 15px; padding: 20px; margin-bottom: 30px; background: rgba(255,215,0,0.05); max-width: 600px; margin-left: auto; margin-right: auto; }
+        h1, h2 { color: gold; text-transform: uppercase; letter-spacing: 2px; }
+        .btn-tirar { background: linear-gradient(to bottom, gold, #b8860b); border: none; padding: 15px 30px; font-weight: bold; cursor: pointer; border-radius: 5px; font-size: 1.1rem; margin-top: 10px; transition: 0.3s; }
+        .btn-tirar:hover { transform: scale(1.05); }
+        input[type="date"] { padding: 10px; border-radius: 5px; border: 1px solid gold; background: #222; color: white; margin-bottom: 10px; width: 80%; }
+        .banner { margin: 20px 0; min-height: 90px; background: rgba(255,255,255,0.05); display: flex; align-items: center; justify-content: center; border: 1px dashed #444; }
+        .resultado { margin-top: 20px; padding: 15px; border-top: 1px solid gold; display: none; }
+        #txt-num { text-align: justify; line-height: 1.6; color: #ccc; }
+    </style>
+</head>
+<body>
 
-About
-No description, website, or topics provided.
- Activity
-Stars
- 0 stars
-Watchers
- 0 watching
-Forks
- 0 forks
-Releases
-No releases published
-Create a new release
-Packages
-No packages published
-Publish your first package
-Deployments
-23
- github-pages 34 minutes ago
-+ 22 deployments
-Languages
-HTML
-100.0%
-Footer
-© 2026 GitHub, Inc.
-Footer navigation
-Terms
-Privacy
-Security
-Status
-Community
-Docs
-Contact
-Manage cookies
-Do not share my personal information
+    <h1>✨ MAESTRO TAROT ✨</h1>
+    
+    <div class="banner">
+        <p style="color: #666; font-size: 12px;">PUBLICIDAD DISPONIBLE</p>
+    </div>
+
+    <div class="caja">
+        <h2>🔮 TAROT PROFESIONAL</h2>
+        <p>Consulta las 78 cartas del destino.</p>
+        <button class="btn-tirar" onclick="alert('Barajando las 78 cartas... Prepárate para la revelación.')">REALIZAR TIRADA GRATIS</button>
+    </div>
+
+    <div class="caja">
+        <h2>🔢 TU NÚMERO DE VIDA</h2>
+        <p>Introduce tu nacimiento para conocer tu misión.</p>
+        <input type="date" id="fechaNac">
+        <br>
+        <button class="btn-tirar" onclick="calcularNumerologia()">CALCULAR MI DESTINO</button>
+        
+        <div id="res-num" class="resultado">
+            <h3 id="titulo-num" style="color: gold; font-size: 2rem;"></h3>
+            <p id="txt-num"></p>
+        </div>
+    </div>
+
+    <div class="banner">
+        <p style="color: #666; font-size: 12px;">PUBLICIDAD DISPONIBLE</p>
+    </div>
+
+    <script>
+    function calcularNumerologia() {
+        const fecha = document.getElementById('fechaNac').value;
+        if (!fecha) { alert("Selecciona tu fecha de nacimiento"); return; }
+        
+        const sumaTotal = fecha.replace(/-/g, '').split('').map(Number).reduce((a, b) => a + b, 0);
+        
+        function reducir(n) {
+            if ([11, 22, 33].includes(n)) return n;
+            return n < 10 ? n : reducir(String(n).split('').map(Number).reduce((a, b) => a + b, 0));
+        }
+
+        const resultado = reducir(sumaTotal);
+        const textos = {
+            1: "EL LÍDER: Has nacido para guiar. Tu energía es de mando, originalidad e independencia.",
+            2: "EL MEDIADOR: Tu don es la diplomacia. Buscas la paz y el equilibrio en todo.",
+            3: "EL COMUNICADOR: Eres pura creatividad. Tu éxito vendrá a través de la autoexpresión.",
+            4: "EL CONSTRUCTOR: Eres el pilar de la estabilidad. Te basas en el orden y la disciplina.",
+            5: "EL ESPÍRITU LIBRE: Buscas aventura y cambio constante. Tu misión es la libertad.",
+            6: "EL PROTECTOR: Eres el refugio de los demás. Tu destino es el amor y la responsabilidad.",
+            7: "EL SABIO: Buscas la verdad oculta. Tu mente es profunda, analítica y espiritual.",
+            8: "EL EJECUTIVO: El éxito material y la abundancia financiera están en tu camino.",
+            9: "EL HUMANITARIO: Representas el amor universal. Tu camino es servir a la humanidad.",
+            11: "NÚMERO MAESTRO: Posees una intuición superior. Eres un faro de luz espiritual.",
+            22: "NÚMERO MAESTRO: El arquitecto de sueños. Construyes cosas que benefician al mundo.",
+            33: "NÚMERO MAESTRO: El guía espiritual. Tu vibración es el amor incondicional absoluto."
+        };
+
+        document.getElementById('res-num').style.display = 'block';
+        document.getElementById('titulo-num').innerText = "VIBRACIÓN: " + resultado;
+        document.getElementById('txt-num').innerText = textos[resultado];
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+    </script>
+</body>
+</html>
