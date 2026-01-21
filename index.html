@@ -58,79 +58,21 @@
     <script>
         const partidos = {
             j21: ["Levante vs Elche", "Rayo vs Osasuna", "Valencia vs Espanyol", "Sevilla vs Athletic", "Villarreal vs Real Madrid", "Barcelona vs Oviedo"],
-            j22: ["Espanyol vs Alavés", "Oviedo vs Girona", "Osasuna vs Villarreal", "Levante vs Atlético", "Real Madrid vs Rayo", "Barcelona vs Elche"],
+            j22: ["Espanyol vs Alavés", "Oviedo vs Girona", "Osasuna vs Villarreal", "Levante vs Atlético", "Real Madrid vs Rayo"],
             j23: ["Alavés vs Getafe", "Athletic vs Levante", "Atlético vs Betis", "Barcelona vs Mallorca"]
         };
 
         const mazo78 = [
-            {n: "El Mago", i: "https://www.trustedtarot.com/img/cards/the-magician.png"},
-            {n: "La Sacerdotisa", i: "https://www.trustedtarot.com/img/cards/the-high-priestess.png"},
-            {n: "La Emperatriz", i: "https://www.trustedtarot.com/img/cards/the-empress.png"},
-            {n: "El Emperador", i: "https://www.trustedtarot.com/img/cards/the-emperor.png"},
-            {n: "El Papa", i: "https://www.trustedtarot.com/img/cards/the-hierophant.png"},
-            {n: "Los Enamorados", i: "https://www.trustedtarot.com/img/cards/the-lovers.png"},
-            {n: "El Carro", i: "https://www.trustedtarot.com/img/cards/the-chariot.png"},
-            {n: "La Fuerza", i: "https://www.trustedtarot.com/img/cards/strength.png"},
-            {n: "El Ermitaño", i: "https://www.trustedtarot.com/img/cards/the-hermit.png"},
-            {n: "La Rueda de la Fortuna", i: "https://www.trustedtarot.com/img/cards/the-wheel-of-fortune.png"},
-            {n: "La Justicia", i: "https://www.trustedtarot.com/img/cards/justice.png"},
-            {n: "El Colgado", i: "https://www.trustedtarot.com/img/cards/the-hanged-man.png"},
-            {n: "La Muerte", i: "https://www.trustedtarot.com/img/cards/death.png"},
-            {n: "La Templanza", i: "https://www.trustedtarot.com/img/cards/temperance.png"},
-            {n: "El Diablo", i: "https://www.trustedtarot.com/img/cards/the-devil.png"},
-            {n: "La Torre", i: "https://www.trustedtarot.com/img/cards/the-tower.png"},
-            {n: "La Estrella", i: "https://www.trustedtarot.com/img/cards/the-star.png"},
-            {n: "La Luna", i: "https://www.trustedtarot.com/img/cards/the-moon.png"},
-            {n: "El Sol", i: "https://www.trustedtarot.com/img/cards/the-sun.png"},
-            {n: "El Juicio", i: "https://www.trustedtarot.com/img/cards/judgement.png"},
-            {n: "El Mundo", i: "https://www.trustedtarot.com/img/cards/the-world.png"},
-            {n: "El Loco", i: "https://www.trustedtarot.com/img/cards/the-fool.png"}
-        ];
-
-        let pSel = "";
-
-        function cargarP() {
-            const j = document.getElementById('selectorJ').value;
-            const c = document.getElementById('contPartidos');
-            c.innerHTML = "";
-            if(!j) return;
-            partidos[j].forEach(p => {
-                const b = document.createElement('button');
-                b.className = "btn-partido"; b.innerText = p;
-                b.onclick = (e) => {
-                    document.querySelectorAll('.btn-partido').forEach(x => x.classList.remove('active'));
-                    e.target.classList.add('active'); pSel = p;
-                    document.getElementById('btn-run-dep').style.display = "inline-block";
-                };
-                c.appendChild(b);
-            });
-        }
-
-        function tirada(tipo) {
-            // MEZCLA REAL CADA VEZ
-            let baraja = [...mazo78].sort(() => Math.random() - 0.5);
-            let c1 = baraja[0], c2 = baraja[1], c3 = baraja[2];
-
-            document.getElementById(`${tipo === 'dep' ? 'd' : 'p'}-c1`).style.backgroundImage = `url('${c1.i}')`;
-            document.getElementById(`${tipo === 'dep' ? 'd' : 'p'}-c2`).style.backgroundImage = `url('${c2.i}')`;
-            document.getElementById(`${tipo === 'dep' ? 'd' : 'p'}-c3`).style.backgroundImage = `url('${c3.i}')`;
-
-            document.getElementById(`res-${tipo}`).style.display = "block";
-
-            if(tipo === 'dep') {
-                const opciones = [
-                    `La carta de ${c1.n} vaticina victoria local en ${pSel}.`,
-                    `Equilibrio absoluto en el duelo ${pSel} bajo la sombra de ${c2.n}. Empate.`,
-                    `El destino sonríe al visitante en ${pSel} con la fuerza de ${c3.n}.`
-                ];
-                document.getElementById('t-dep').innerHTML = opciones[Math.floor(Math.random() * opciones.length)];
-            } else {
-                // AQUÍ ESTABA EL FALLO, AHORA USA EL NOMBRE DE LA CARTA REAL
-                document.getElementById('t-pers').innerHTML = "Tu futuro está marcado por <b>" + c1.n + "</b>. " + 
-                (c1.n === "La Muerte" || c1.n === "La Torre" ? "Se avecinan cambios drásticos pero necesarios." : "Vienen grandes noticias y prosperidad pronto.");
-            }
-            document.getElementById(`res-${tipo}`).scrollIntoView({behavior: 'smooth'});
-        }
-    </script>
-</body>
-</html>
+            {n: "El Mago", i: "https://www.trustedtarot.com/img/cards/the-magician.png", m: "Tienes el poder de crear tu realidad ahora mismo."},
+            {n: "La Sacerdotisa", i: "https://www.trustedtarot.com/img/cards/the-high-priestess.png", m: "Escucha tu intuición, hay secretos que se revelarán pronto."},
+            {n: "La Emperatriz", i: "https://www.trustedtarot.com/img/cards/the-empress.png", m: "Periodo de abundancia y creatividad desbordante."},
+            {n: "El Emperador", i: "https://www.trustedtarot.com/img/cards/the-emperor.png", m: "Es momento de poner orden y tomar el control de tu vida."},
+            {n: "El Papa", i: "https://www.trustedtarot.com/img/cards/the-hierophant.png", m: "Busca consejo en personas sabias o tradiciones antiguas."},
+            {n: "Los Enamorados", i: "https://www.trustedtarot.com/img/cards/the-lovers.png", m: "Una decisión importante en el amor o socios se acerca."},
+            {n: "El Carro", i: "https://www.trustedtarot.com/img/cards/the-chariot.png", m: "Victoria y avance rápido hacia tus metas."},
+            {n: "La Justicia", i: "https://www.trustedtarot.com/img/cards/justice.png", m: "Recibirás lo que mereces; el equilibrio se restablece."},
+            {n: "El Ermitaño", i: "https://www.trustedtarot.com/img/cards/the-hermit.png", m: "Busca la respuesta en tu interior, no en los demás."},
+            {n: "La Rueda de la Fortuna", i: "https://www.trustedtarot.com/img/cards/the-wheel-of-fortune.png", m: "Un cambio de suerte inesperado está por ocurrir."},
+            {n: "La Fuerza", i: "https://www.trustedtarot.com/img/cards/strength.png", m: "Domina tus miedos con suavidad y coraje."},
+            {n: "El Colgado", i: "https://www.trustedtarot.com/img/cards/the-hanged-man.png", m: "Es necesario ver las cosas desde otra perspectiva."},
+            {n: "
