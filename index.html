@@ -17,14 +17,15 @@
         .btn-magico { background: linear-gradient(gold, #ccaa00); color: black; font-weight: bold; padding: 18px 35px; border: none; border-radius: 50px; font-size: 1.2rem; cursor: pointer; margin: 20px 0; box-shadow: 0 0 15px gold; display: none; text-transform: uppercase; }
         .zona-resultado { display: none; margin-top: 30px; animation: fadeIn 0.8s; border-top: 1px solid gold; padding-top: 20px; }
         .card-container { display: flex; justify-content: center; gap: 15px; margin: 20px 0; flex-wrap: wrap; }
-        .card-img { width: 100px; height: 170px; background-size: cover; border: 2px solid gold; border-radius: 8px; }
+        .card-img { width: 100px; height: 170px; background-size: cover; border: 2px solid gold; border-radius: 8px; background-position: center; }
         .res-texto { padding: 20px; border-radius: 10px; background: #0f3460; border: 2px solid gold; color: gold; font-size: 1.3rem; font-weight: bold; max-width: 600px; margin: 20px auto; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
     <div class="header"><h1>🔮 MAESTRO TAROT</h1></div>
-    <div class="ad-slot" id="ad-top"><p>PUBLICIDAD SUPERIOR (Pegar código Coinzilla aquí)</p></div>
+    <div class="ad-slot" id="ad-top"><p>PUBLICIDAD SUPERIOR</p></div>
+    
     <div class="seccion">
         <h2>⚽ ELIGE TU PARTIDO</h2>
         <select id="selectorJ" onchange="cargarP()">
@@ -36,34 +37,58 @@
         <div id="contPartidos" class="grid-partidos"></div>
         <button id="btn-run-dep" class="btn-magico" onclick="tirada('dep')">Consultar Fútbol</button>
     </div>
+
     <div id="res-dep" class="zona-resultado seccion">
         <div class="card-container"><div id="d-c1" class="card-img"></div><div id="d-c2" class="card-img"></div><div id="d-c3" class="card-img"></div></div>
         <div id="t-dep" class="res-texto"></div>
     </div>
+
     <div class="ad-slot" id="ad-middle"><p>PUBLICIDAD INTERMEDIA</p></div>
+
     <div class="seccion" style="border-color: #00ffcc;">
-        <h2 style="color: #00ffcc;">🌟 TAROT PERSONAL</h2>
+        <h2 style="color: #00ffcc;">🌟 TAROT PROFESIONAL PERSONAL</h2>
         <button id="btn-run-pers" class="btn-magico" style="display:inline-block; background:#00ffcc;" onclick="tirada('pers')">Tirada Profesional Personal</button>
     </div>
+
     <div id="res-pers" class="zona-resultado seccion" style="border-color: #00ffcc;">
         <div class="card-container"><div id="p-c1" class="card-img"></div><div id="p-c2" class="card-img"></div><div id="p-c3" class="card-img"></div></div>
         <div id="t-pers" class="res-texto" style="color:#00ffcc; border-color:#00ffcc;"></div>
     </div>
+
     <script>
         const partidos = {
             j21: ["Levante vs Elche", "Rayo vs Osasuna", "Valencia vs Espanyol", "Sevilla vs Athletic", "Villarreal vs Real Madrid", "Barcelona vs Oviedo"],
             j22: ["Espanyol vs Alavés", "Oviedo vs Girona", "Osasuna vs Villarreal", "Levante vs Atlético", "Real Madrid vs Rayo", "Barcelona vs Elche"],
             j23: ["Alavés vs Getafe", "Athletic vs Levante", "Atlético vs Betis", "Barcelona vs Mallorca"]
         };
+
         const mazo78 = [
             {n: "El Mago", i: "https://www.trustedtarot.com/img/cards/the-magician.png"},
             {n: "La Sacerdotisa", i: "https://www.trustedtarot.com/img/cards/the-high-priestess.png"},
-            {n: "El Sol", i: "https://www.trustedtarot.com/img/cards/the-sun.png"},
+            {n: "La Emperatriz", i: "https://www.trustedtarot.com/img/cards/the-empress.png"},
+            {n: "El Emperador", i: "https://www.trustedtarot.com/img/cards/the-emperor.png"},
+            {n: "El Papa", i: "https://www.trustedtarot.com/img/cards/the-hierophant.png"},
+            {n: "Los Enamorados", i: "https://www.trustedtarot.com/img/cards/the-lovers.png"},
+            {n: "El Carro", i: "https://www.trustedtarot.com/img/cards/the-chariot.png"},
+            {n: "La Fuerza", i: "https://www.trustedtarot.com/img/cards/strength.png"},
+            {n: "El Ermitaño", i: "https://www.trustedtarot.com/img/cards/the-hermit.png"},
+            {n: "La Rueda de la Fortuna", i: "https://www.trustedtarot.com/img/cards/the-wheel-of-fortune.png"},
+            {n: "La Justicia", i: "https://www.trustedtarot.com/img/cards/justice.png"},
+            {n: "El Colgado", i: "https://www.trustedtarot.com/img/cards/the-hanged-man.png"},
+            {n: "La Muerte", i: "https://www.trustedtarot.com/img/cards/death.png"},
+            {n: "La Templanza", i: "https://www.trustedtarot.com/img/cards/temperance.png"},
+            {n: "El Diablo", i: "https://www.trustedtarot.com/img/cards/the-devil.png"},
             {n: "La Torre", i: "https://www.trustedtarot.com/img/cards/the-tower.png"},
+            {n: "La Estrella", i: "https://www.trustedtarot.com/img/cards/the-star.png"},
+            {n: "La Luna", i: "https://www.trustedtarot.com/img/cards/the-moon.png"},
+            {n: "El Sol", i: "https://www.trustedtarot.com/img/cards/the-sun.png"},
+            {n: "El Juicio", i: "https://www.trustedtarot.com/img/cards/judgement.png"},
             {n: "El Mundo", i: "https://www.trustedtarot.com/img/cards/the-world.png"},
-            {n: "La Estrella", i: "https://www.trustedtarot.com/img/cards/the-star.png"}
+            {n: "El Loco", i: "https://www.trustedtarot.com/img/cards/the-fool.png"}
         ];
+
         let pSel = "";
+
         function cargarP() {
             const j = document.getElementById('selectorJ').value;
             const c = document.getElementById('contPartidos');
@@ -80,17 +105,29 @@
                 c.appendChild(b);
             });
         }
+
         function tirada(tipo) {
+            // MEZCLA REAL CADA VEZ
             let baraja = [...mazo78].sort(() => Math.random() - 0.5);
-            document.getElementById(`${tipo === 'dep' ? 'd' : 'p'}-c1`).style.backgroundImage = `url('${baraja[0].i}')`;
-            document.getElementById(`${tipo === 'dep' ? 'd' : 'p'}-c2`).style.backgroundImage = `url('${baraja[1].i}')`;
-            document.getElementById(`${tipo === 'dep' ? 'd' : 'p'}-c3`).style.backgroundImage = `url('${baraja[2].i}')`;
+            let c1 = baraja[0], c2 = baraja[1], c3 = baraja[2];
+
+            document.getElementById(`${tipo === 'dep' ? 'd' : 'p'}-c1`).style.backgroundImage = `url('${c1.i}')`;
+            document.getElementById(`${tipo === 'dep' ? 'd' : 'p'}-c2`).style.backgroundImage = `url('${c2.i}')`;
+            document.getElementById(`${tipo === 'dep' ? 'd' : 'p'}-c3`).style.backgroundImage = `url('${c3.i}')`;
+
             document.getElementById(`res-${tipo}`).style.display = "block";
+
             if(tipo === 'dep') {
-                const opciones = [`Victoria para el local en ${pSel}.`, `Empate en ${pSel}.`, `El visitante ganará en ${pSel}.`];
+                const opciones = [
+                    `La carta de ${c1.n} vaticina victoria local en ${pSel}.`,
+                    `Equilibrio absoluto en el duelo ${pSel} bajo la sombra de ${c2.n}. Empate.`,
+                    `El destino sonríe al visitante en ${pSel} con la fuerza de ${c3.n}.`
+                ];
                 document.getElementById('t-dep').innerHTML = opciones[Math.floor(Math.random() * opciones.length)];
             } else {
-                document.getElementById('t-pers').innerHTML = "Tu futuro está marcado por " + baraja[0].n + ". Grandes noticias pronto.";
+                // AQUÍ ESTABA EL FALLO, AHORA USA EL NOMBRE DE LA CARTA REAL
+                document.getElementById('t-pers').innerHTML = "Tu futuro está marcado por <b>" + c1.n + "</b>. " + 
+                (c1.n === "La Muerte" || c1.n === "La Torre" ? "Se avecinan cambios drásticos pero necesarios." : "Vienen grandes noticias y prosperidad pronto.");
             }
             document.getElementById(`res-${tipo}`).scrollIntoView({behavior: 'smooth'});
         }
