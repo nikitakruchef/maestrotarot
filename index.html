@@ -2,109 +2,88 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maestro Tarot</title>
+    <title>Tarot Maestro</title>
     <style>
-        body { background: #0b0b1a; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-        .bloque { background: #16213e; padding: 20px; border-radius: 15px; max-width: 600px; margin: 20px auto; border: 1px solid gold; }
-        .ad { background: rgba(255,255,255,0.05); border: 1px dashed #444; height: 90px; margin: 10px auto; line-height: 90px; color: #444; }
-        select, button { padding: 12px; width: 90%; margin: 10px 0; border-radius: 8px; font-size: 1rem; }
-        select { background: #000; color: gold; border: 1px solid gold; }
-        button { background: gold; color: black; font-weight: bold; border: none; cursor: pointer; }
-        .partido-item { background: #1a1a2e; padding: 10px; margin: 5px; border: 1px solid #333; cursor: pointer; display: inline-block; width: 40%; }
-        .partido-item.active { background: gold; color: black; }
-        .resultado { display: none; margin-top: 20px; padding: 20px; background: rgba(0,0,0,0.5); border-radius: 10px; border: 1px solid #00ffcc; }
-        .cartas-zona { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
-        .c-img { width: 80px; height: 130px; background-size: cover; border: 1px solid gold; border-radius: 5px; }
+        body { background: #0b0b1a; color: white; font-family: sans-serif; text-align: center; }
+        .caja { border: 2px solid gold; padding: 20px; max-width: 500px; margin: 20px auto; border-radius: 10px; }
+        .partido { display: block; width: 100%; padding: 10px; margin: 5px 0; background: #1a1a2e; color: white; border: 1px solid #444; cursor: pointer; }
+        .partido:hover { border-color: gold; }
+        .carta { width: 80px; height: 120px; display: inline-block; border: 1px solid gold; margin: 5px; background-size: cover; }
+        #resultado-futbol, #resultado-personal { display: none; margin-top: 20px; background: #000; padding: 10px; }
     </style>
 </head>
 <body>
 
     <h1>🔮 MAESTRO TAROT</h1>
-    <div class="ad">PUBLICIDAD SUPERIOR</div>
 
-    <div class="bloque">
-        <h2>⚽ PREDICCIÓN FÚTBOL</h2>
-        <select id="jornada" onchange="mostrarPartidos()">
+    <div class="caja">
+        <h2>⚽ SELECCIONA PARTIDO</h2>
+        <select id="jornada" onchange="verPartidos()" style="width:100%; padding:10px;">
             <option value="">-- Elige Jornada --</option>
             <option value="j21">Jornada 21</option>
             <option value="j22">Jornada 22</option>
-            <option value="j23">Jornada 23</option>
         </select>
-        <div id="contenedorPartidos"></div>
-        <button id="btnFutbol" style="display:none;" onclick="tirada('futbol')">VER DESTINO</button>
-        
-        <div id="res-futbol" class="resultado">
-            <div class="cartas-zona"><div id="f1" class="c-img"></div><div id="f2" class="c-img"></div><div id="f3" class="c-img"></div></div>
-            <p id="txt-futbol" style="font-size: 1.2rem; color: gold;"></p>
+        <div id="lista-p" style="margin-top:10px;"></div>
+        <div id="resultado-futbol">
+            <div id="f1" class="carta"></div><div id="f2" class="carta"></div><div id="f3" class="carta"></div>
+            <p id="txt-f" style="color:gold; font-weight:bold;"></p>
         </div>
     </div>
 
-    <div class="bloque" style="border-color: #00ffcc;">
+    <div class="caja" style="border-color: #00ffcc;">
         <h2 style="color: #00ffcc;">🌟 TAROT PERSONAL</h2>
-        <button onclick="tirada('personal')" style="background: #00ffcc;">REALIZAR TIRADA PROFESIONAL</button>
-        
-        <div id="res-personal" class="resultado">
-            <div class="cartas-zona"><div id="p1" class="c-img"></div><div id="p2" class="c-img"></div><div id="p3" class="c-img"></div></div>
-            <p id="txt-personal" style="font-size: 1.2rem; color: #00ffcc;"></p>
+        <button onclick="tirarPersonal()" style="width:100%; padding:15px; background:#00ffcc; font-weight:bold; cursor:pointer;">REALIZAR TIRADA PROFESIONAL</button>
+        <div id="resultado-personal">
+            <div id="p1" class="carta"></div><div id="p2" class="carta"></div><div id="p3" class="carta"></div>
+            <p id="txt-p" style="color:#00ffcc; font-weight:bold;"></p>
         </div>
     </div>
 
     <script>
         const partidos = {
-            j21: ["Levante-Elche", "Rayo-Osasuna", "Valencia-Espanyol", "Sevilla-Athletic", "Villarreal-Madrid", "Barça-Oviedo"],
-            j22: ["Espanyol-Alavés", "Oviedo-Girona", "Osasuna-Villarreal", "Madrid-Rayo", "Betis-Valencia"],
-            j23: ["Alavés-Getafe", "Athletic-Levante", "Atlético-Betis", "Barça-Mallorca", "Celta-Osasuna"]
+            j21: ["Levante vs Elche", "Rayo vs Osasuna", "Valencia vs Espanyol", "Sevilla vs Athletic"],
+            j22: ["Espanyol vs Alavés", "Oviedo vs Girona", "Real Madrid vs Rayo", "Betis vs Valencia"]
         };
 
         const mazo = [
-            {n:"El Mago", i:"the-magician.png", t:"Inicio de éxito."},
-            {n:"El Sol", i:"the-sun.png", t:"Claridad y alegría."},
-            {n:"El Mundo", i:"the-world.png", t:"Ciclo cumplido."},
-            {n:"La Estrella", i:"the-star.png", t:"Esperanza renovada."},
-            {n:"El Carro", i:"the-chariot.png", t:"Avance imparable."},
-            {n:"La Rueda", i:"the-wheel-of-fortune.png", t:"Cambio de suerte."},
-            {n:"La Fuerza", i:"strength.png", t:"Coraje y éxito."}
+            {n:"Mago", i:"the-magician.png", t:"Éxito inminente."},
+            {n:"Sol", i:"the-sun.png", t:"Gran alegría."},
+            {n:"Mundo", i:"the-world.png", t:"Objetivo cumplido."},
+            {n:"Estrella", i:"the-star.png", t:"Nueva esperanza."},
+            {n:"Torre", i:"the-tower.png", t:"Cambio necesario."}
         ];
 
-        let elegido = "";
-
-        function mostrarPartidos() {
+        function verPartidos() {
             const j = document.getElementById('jornada').value;
-            const cont = document.getElementById('contenedorPartidos');
-            cont.innerHTML = "";
-            document.getElementById('btnFutbol').style.display = "none";
+            const lista = document.getElementById('lista-p');
+            lista.innerHTML = "";
             if(!j) return;
             partidos[j].forEach(p => {
-                const div = document.createElement('div');
-                div.className = 'partido-item';
-                div.innerText = p;
-                div.onclick = function() {
-                    Array.from(document.getElementsByClassName('partido-item')).forEach(x => x.classList.remove('active'));
-                    this.classList.add('active');
-                    elegido = p;
-                    document.getElementById('btnFutbol').style.display = "block";
-                };
-                cont.appendChild(div);
+                const btn = document.createElement('button');
+                btn.className = 'partido';
+                btn.innerText = p;
+                btn.onclick = () => tirarFutbol(p);
+                lista.appendChild(btn);
             });
         }
 
-        function tirada(tipo) {
-            let mezcla = [...mazo].sort(() => Math.random() - 0.5);
-            let prefijo = tipo === 'futbol' ? 'f' : 'p';
-            
-            for(let i=1; i<=3; i++) {
-                document.getElementById(prefijo+i).style.backgroundImage = `url('https://www.trustedtarot.com/img/cards/${mezcla[i-1].i}')`;
-            }
+        function tirarFutbol(nombre) {
+            let m = [...mazo].sort(() => Math.random() - 0.5);
+            document.getElementById('f1').style.backgroundImage = `url(https://www.trustedtarot.com/img/cards/${m[0].i})`;
+            document.getElementById('f2').style.backgroundImage = `url(https://www.trustedtarot.com/img/cards/${m[1].i})`;
+            document.getElementById('f3').style.backgroundImage = `url(https://www.trustedtarot.com/img/cards/${m[2].i})`;
+            const res = ["Victoria Local", "Empate", "Victoria Visitante"];
+            document.getElementById('txt-f').innerText = nombre + ": " + res[Math.floor(Math.random()*3)];
+            document.getElementById('resultado-futbol').style.display = "block";
+        }
 
-            document.getElementById('res-'+tipo).style.display = "block";
-
-            if(tipo === 'futbol') {
-                const f = ["Gana Local", "Empate", "Gana Visitante"];
-                document.getElementById('txt-futbol').innerText = elegido + ": " + f[Math.floor(Math.random()*3)];
-            } else {
-                document.getElementById('txt-personal').innerText = "Carta dominante: " + mezcla[0].n + ". " + mezcla[0].t;
-            }
+        function tirarPersonal() {
+            let m = [...mazo].sort(() => Math.random() - 0.5);
+            document.getElementById('p1').style.backgroundImage = `url(https://www.trustedtarot.com/img/cards/${m[0].i})`;
+            document.getElementById('p2').style.backgroundImage = `url(https://www.trustedtarot.com/img/cards/${m[1].i})`;
+            document.getElementById('p3').style.backgroundImage = `url(https://www.trustedtarot.com/img/cards/${m[2].i})`;
+            document.getElementById('txt-p').innerText = "Tu destino: " + m[0].n + ". " + m[0].t;
+            document.getElementById('resultado-personal').style.display = "block";
         }
     </script>
 </body>
