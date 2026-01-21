@@ -3,86 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Maestro Tarot | Oráculo de Élite</title>
+    <title>Maestro Tarot | Élite</title>
     <style>
-        body { background: #050510; color: white; font-family: 'Georgia', serif; text-align: center; margin: 0; padding-bottom: 100px; }
-        .header { background: linear-gradient(to bottom, #1a1a2e, #050510); padding: 40px; border-bottom: 3px solid #d4af37; }
-        .ad-banner { background: rgba(212, 175, 55, 0.1); border: 1px dashed #d4af37; margin: 20px auto; padding: 20px; max-width: 728px; min-height: 90px; color: #888; display: flex; align-items: center; justify-content: center; }
-        .seccion { background: #16213e; padding: 30px; border-radius: 20px; max-width: 900px; margin: 30px auto; border: 1px solid #333; box-shadow: 0 15px 35px rgba(0,0,0,0.7); }
-        h1 { color: #d4af37; font-size: 2.5rem; letter-spacing: 3px; margin: 0; }
-        h2 { color: #d4af37; text-transform: uppercase; font-size: 1.5rem; }
-        select { padding: 15px; width: 90%; border-radius: 10px; background: #000; color: #d4af37; border: 2px solid #d4af37; font-size: 1.2rem; margin-bottom: 25px; cursor: pointer; }
-        .grid-partidos { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 20px 0; }
-        .btn-partido { background: #1a1a2e; color: #aaa; border: 1px solid #444; padding: 15px; border-radius: 10px; cursor: pointer; transition: 0.3s; font-size: 1rem; }
-        .btn-partido.active { background: #d4af37; color: black; font-weight: bold; transform: scale(1.05); border-color: white; }
-        .btn-principal { background: linear-gradient(#d4af37, #aa8a2e); color: black; font-weight: bold; padding: 20px 50px; border: none; border-radius: 50px; font-size: 1.3rem; cursor: pointer; margin: 30px 0; display: none; box-shadow: 0 0 25px rgba(212,175,55,0.4); text-transform: uppercase; }
-        .resultado { display: none; margin-top: 40px; border-top: 2px solid #d4af37; padding-top: 40px; animation: aparece 1s ease-out; }
-        .cartas-zona { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; flex-wrap: wrap; }
-        .carta-img { width: 120px; height: 200px; background-size: cover; border: 3px solid #d4af37; border-radius: 12px; box-shadow: 0 8px 20px rgba(0,0,0,0.6); background-position: center; }
-        .lectura-texto { padding: 35px; border-radius: 15px; background: #0f3460; border: 2px solid #d4af37; color: #e0e0e0; font-size: 1.4rem; font-weight: normal; max-width: 750px; margin: 0 auto; line-height: 1.6; text-align: justify; }
-        @keyframes aparece { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        body { background: #050510; color: white; font-family: sans-serif; text-align: center; margin: 0; padding-bottom: 50px; }
+        .header { background: #1a1a2e; padding: 30px; border-bottom: 3px solid gold; }
+        .banner { background: rgba(255,215,0,0.1); border: 1px dashed gold; margin: 20px auto; padding: 20px; max-width: 90%; color: #888; }
+        .caja { background: #16213e; padding: 20px; border-radius: 15px; max-width: 900px; margin: 20px auto; border: 1px solid #333; }
+        select { padding: 15px; width: 90%; background: #000; color: gold; border: 2px solid gold; font-size: 1.1rem; }
+        .grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 20px; }
+        .btn-p { background: #1a1a2e; color: white; border: 1px solid #444; padding: 12px; border-radius: 8px; cursor: pointer; min-width: 140px; }
+        .btn-p.active { background: gold; color: black; font-weight: bold; }
+        .btn-tirar { background: gold; color: black; padding: 20px; width: 80%; border: none; border-radius: 30px; font-weight: bold; font-size: 1.2rem; cursor: pointer; margin: 20px 0; display: none; }
+        .resultado { display: none; margin-top: 20px; border-top: 2px solid gold; padding: 20px; }
+        .cartas { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+        .c-img { width: 80px; height: 130px; border: 2px solid gold; border-radius: 8px; background-size: cover; background-position: center; }
+        .texto-largo { background: #0f3460; padding: 20px; border: 1px solid gold; border-radius: 10px; text-align: justify; line-height: 1.6; font-size: 1.1rem; color: #eee; }
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>🔮 MAESTRO TAROT</h1>
-        <p>El Oráculo Supremo - Consultas de Élite Profesional</p>
+<div class="header"><h1>🔮 MAESTRO TAROT</h1></div>
+
+<div class="banner"><strong>PUBLICIDAD SUPERIOR</strong><br>Espacio para banner Coinzilla 728x90</div>
+
+<div class="caja">
+    <h2>⚽ ORÁCULO DEPORTIVO</h2>
+    <select id="selJ" onchange="cambiarJornada()">
+        <option value="">-- Elige Jornada --</option>
+        <option value="j21">Jornada 21</option>
+        <option value="j22">Jornada 22</option>
+        <option value="j23">Jornada 23</option>
+        <option value="j24">Jornada 24</option>
+        <option value="j25">Jornada 25</option>
+        <option value="j26">Jornada 26</option>
+    </select>
+    <div id="listaPartidos" class="grid"></div>
+    <button id="btnD" class="btn-tirar" onclick="hacerTirada('dep')">REVELAR DESTINO DEL PARTIDO</button>
+    <div id="res-dep" class="resultado">
+        <div class="cartas"><div id="d1" class="c-img"></div><div id="d2" class="c-img"></div><div id="d3" class="c-img"></div></div>
+        <div id="txt-dep" class="texto-largo"></div>
     </div>
+</div>
 
-    <div class="ad-banner">
-        <div>[ESPACIO PARA PUBLICIDAD CRIPTO - 728x90]<br><small>Inserta aquí tu código de Coinzilla o A-Ads</small></div>
+<div class="banner"><strong>PUBLICIDAD INTERMEDIA</strong><br>Anuncios Cripto / Trading</div>
+
+<div class="caja" style="border-color: #00ffcc;">
+    <h2 style="color: #00ffcc;">🌟 TAROT PROFESIONAL PERSONAL</h2>
+    <button id="btnP" class="btn-tirar" style="display:block; background:#00ffcc;" onclick="hacerTirada('per')">REALIZAR GRAN TIRADA PERSONAL</button>
+    <div id="res-per" class="resultado" style="border-color:#00ffcc;">
+        <div class="cartas"><div id="p1" class="c-img"></div><div id="p2" class="c-img"></div><div id="p3" class="c-img"></div></div>
+        <div id="txt-per" class="texto-largo" style="border-color:#00ffcc;"></div>
     </div>
+</div>
 
-    <div class="seccion">
-        <h2>⚽ CONSULTA EL DESTINO DE LA JORNADA</h2>
-        <select id="selJornada" onchange="cargarPartidos()">
-            <option value="">-- Selecciona una Jornada --</option>
-            <option value="j21">Jornada 21</option>
-            <option value="j22">Jornada 22</option>
-            <option value="j23">Jornada 23</option>
-            <option value="j24">Jornada 24</option>
-            <option value="j25">Jornada 25</option>
-            <option value="j26">Jornada 26</option>
-        </select>
+<script>
+const liga = {
+    j21: ["Levante-Elche", "Rayo-Osasuna", "Valencia-Espanyol", "Sevilla-Athletic", "Villarreal-Madrid", "Barça-Oviedo"],
+    j22: ["Espanyol-Alavés", "Oviedo-Girona", "Osasuna-Villarreal", "Madrid-Rayo", "Betis-Valencia"],
+    j23: ["Alavés-Getafe", "Athletic-Levante", "Atlético-Betis", "Barça-Mallorca", "Sevilla-Girona"],
+    j24: ["Girona-Barça", "Madrid-Sociedad", "Rayo-Atlético", "Sevilla-Alavés", "Villarreal-Getafe"],
+    j25: ["Barça-Levante", "Atleti-Espanyol", "Osasuna-Madrid", "Betis-Rayo", "Celta-Mallorca"],
+    j26: ["Barça-Villarreal", "Madrid-Getafe", "Betis-Sevilla", "Valencia-Osasuna", "Oviedo-Atleti"]
+};
 
-        <div id="gridPartidos" class="grid-partidos"></div>
-        <button id="btnFutbol" class="btn-principal" onclick="revelar('dep')">Consultar Oráculo Deportivo</button>
+const mazo = [
+    {n:"EL MAGO", i:"the-magician.png", t:"Representa el poder absoluto y la capacidad de canalizar la energía para lograr tus objetivos. Tienes todas las herramientas necesarias para triunfar, solo necesitas voluntad y enfoque. La suerte te acompaña en nuevos proyectos y decisiones inmediatas."},
+    {n:"EL SOL", i:"the-sun.png", t:"Es la carta del éxito total y la claridad. Augura un periodo de gran felicidad, vitalidad y transparencia. Todo lo que estaba oculto sale a la luz para beneficiarte. Es el momento perfecto para disfrutar de la prosperidad y el amor sincero."},
+    {n:"LA TORRE", i:"the-tower.png", t:"Indica una ruptura con estructuras viejas y obsoletas. Aunque el cambio pueda parecer brusco, es una liberación necesaria para construir algo más sólido sobre bases reales. No temas a la transformación, es el inicio de tu renacimiento."},
+    {n:"EL MUNDO", i:"the-world.png", t:"Simboliza la culminación de un ciclo importante y el éxito rotundo. Has llegado a la meta y el universo te premia con plenitud. Es momento de celebrar tus logros y prepararte para una nueva etapa de expansión y reconocimiento global."},
+    {n:"LA RUEDA", i:"the-wheel-of-fortune.png", t:"El destino gira a tu favor. Los cambios que vienen son inevitables y positivos. Esta carta te recuerda que la vida son ciclos y ahora te toca estar en la cima. Aprovecha las oportunidades inesperadas que el azar pone en tu camino hoy."}
+];
 
-        <div id="res-dep" class="resultado">
-            <div class="cartas-zona"><div id="d1" class="carta-img"></div><div id="d2" class="carta-img"></div><div id="d3" class="carta-img"></div></div>
-            <div id="txt-dep" class="lectura-texto"></div>
-        </div>
-    </div>
+let partidoElegido = "";
 
-    <div class="ad-banner">
-        <div>[PUBLICIDAD INTERMEDIA - 728x90]</div>
-    </div>
-
-    <div class="seccion" style="border-color: #00ffcc;">
-        <h2 style="color: #00ffcc;">🌟 TIRADA PROFESIONAL PERSONAL</h2>
-        <p>Amor, Dinero, Salud y Destino General</p>
-        <button class="btn-principal" style="display:inline-block; background: #00ffcc; box-shadow: 0 0 20px #00ffcc;" onclick="revelar('per')">Realizar Gran Tirada Personal</button>
-        
-        <div id="res-per" class="resultado" style="border-color:#00ffcc;">
-            <div class="cartas-zona"><div id="p1" class="carta-img"></div><div id="p2" class="carta-img"></div><div id="p3" class="carta-img"></div></div>
-            <div id="txt-per" class="lectura-texto" style="border-color:#00ffcc;"></div>
-        </div>
-    </div>
-
-    <script>
-        const liga = {
-            j21: ["Levante vs Elche", "Rayo vs Osasuna", "Valencia vs Espanyol", "Sevilla vs Athletic", "Villarreal vs Real Madrid", "Atlético vs Mallorca", "Barcelona vs Oviedo", "R. Sociedad vs Celta", "Alavés vs Betis", "Girona vs Getafe"],
-            j22: ["Espanyol vs Alavés", "Oviedo vs Girona", "Osasuna vs Villarreal", "Levante vs Atlético", "Elche vs Barcelona", "Real Madrid vs Rayo", "Betis vs Valencia", "Getafe vs Celta", "Athletic vs R. Sociedad", "Mallorca vs Sevilla"],
-            j23: ["Alavés vs Getafe", "Athletic vs Levante", "Atlético vs Betis", "Barcelona vs Mallorca", "Celta vs Osasuna", "Rayo vs Oviedo", "R. Sociedad vs Elche", "Sevilla vs Girona", "Valencia vs Real Madrid", "Villarreal vs Espanyol"],
-            j24: ["Elche vs Osasuna", "Espanyol vs Celta", "Getafe vs Villarreal", "Girona vs Barcelona", "Levante vs Valencia", "Mallorca vs Betis", "Rayo vs Atlético", "Real Madrid vs R. Sociedad", "Oviedo vs Athletic", "Sevilla vs Alavés"],
-            j25: ["Alavés vs Girona", "Athletic vs Elche", "Atlético vs Espanyol", "Barcelona vs Levante", "Celta vs Mallorca", "Getafe vs Sevilla", "Osasuna vs Real Madrid", "Betis vs Rayo", "R. Sociedad vs Oviedo", "Villarreal vs Valencia"],
-            j26: ["Barcelona vs Villarreal", "Elche vs Espanyol", "Girona vs Celta", "Levante vs Alavés", "Mallorca vs R. Sociedad", "Rayo vs Athletic", "Betis vs Sevilla", "Real Madrid vs Getafe", "Oviedo vs Atlético", "Valencia vs Osasuna"]
+function cambiarJornada() {
+    const j = document.getElementById('selJ').value;
+    const lista = document.getElementById('listaPartidos');
+    lista.innerHTML = "";
+    document.getElementById('btnD').style.display = "none";
+    if(!j) return;
+    liga[j].forEach(p => {
+        const b = document.createElement('button');
+        b.className = 'btn-p';
+        b.innerText = p;
+        b.onclick = () => {
+            document.querySelectorAll('.btn-p').forEach(x => x.classList.remove('active'));
+            b.classList.add('active');
+            partidoElegido = p;
+            document.getElementById('btnD').style.display = "block";
         };
+        lista.appendChild(b);
+    });
+}
 
-        const mazo = [
-            {n: "EL MAGO", i: "the-magician.png", t: "Esta carta simboliza el poder absoluto, la inteligencia y la iniciativa. Indica que tienes a tu disposición todos los recursos necesarios para triunfar en tus proyectos actuales. Es un momento de acción donde tu voluntad será el motor del cambio. En el destino personal, augura el inicio de una etapa llena de creatividad y dominio sobre las circunstancias que antes te parecían difíciles."},
-            {n: "LA SACERDOTISA", i: "the-high-priestess.png", t: "Representa la sabiduría silenciosa, el misterio y la intuición profunda. Te invita a mirar más allá de lo evidente y a confiar en tu voz interior. No es momento de actuar impulsivamente, sino de observar y esperar a que los secretos se revelen por sí mismos. Augura un conocimiento oculto que saldrá a la luz para beneficiar tu camino espiritual y material."},
-            {n: "EL MUNDO", i: "the-world.png", t: "La carta del éxito total y la culminación absoluta. Representa que has alcanzado el final de un ciclo con una victoria rotunda. El universo conspira a tu favor y te otorga reconocimiento, viajes o la resolución definitiva de un conflicto largo. Es la plenitud en todas las áreas de la vida: amor, dinero y salud están en perfecta armonía en este momento de tu existencia."},
-            {n: "LA TORRE", i: "the-tower.png", t: "Simboliza una transformación necesaria a través de un cambio brusco. Indica que aquellas estructuras que no eran sólidas en tu vida van a caer para permitirte construir algo nuevo y mucho más fuerte. Aunque el impacto inicial pueda asustar, es una liberación necesaria de cargas que ya no te permitían avanzar. Un despertar espiritual tras una crisis que te hará invencible."},
-            {n: "EL SOL", i: "the-sun.png", t: "La mejor carta del mazo. Irradia luz, éxito, felicidad y una vitalidad inagotable. Indica que cualquier sombra o duda se disipa ahora mismo. Los proyectos florecen bajo una claridad absoluta y las relaciones personales se llenan de sinceridad y calor. Es un periodo de abundancia garantizada donde tu
+function hacerTirada(tipo) {
+    let m = [...mazo].sort(() => Math.random() - 0.5);
+    for(let i=1; i<=3; i++) {
+        document.getElementById(tipo[0]+i).style.backgroundImage = "url('https://www.trustedtarot.com/img/cards/" + m[i-1].i + "')";
+    }
+    document.getElementById('res-'+tipo).style.display = "block";
+    if(tipo === 'dep') {
+        const ops = ["Victoria del Local", "Empate muy reñido", "Victoria del Visitante"];
+        document.getElementById('txt-dep').innerHTML = "⚽ <b>" + partidoElegido + "</b><br><br>El oráculo predice: " + ops[Math.floor(Math.random()*3)] + ". La energía dominante de la carta " + m[0].n + " sugiere un encuentro donde la estrategia será la clave del marcador final.";
+    } else {
+        document.getElementById('txt-per').innerHTML = "✨ <b>" + m[0].n + "</b><br><br>" + m[0].t;
+    }
+}
+</script>
+</body>
+</html>
