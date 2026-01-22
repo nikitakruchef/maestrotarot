@@ -6,28 +6,29 @@
     <title>Tarot Maestro - Predicciones de Fútbol</title>
     <style>
         body {
-            background-color: #1a1a1a;
+            background-color: #000000;
             color: #ffffff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             text-align: center;
             padding: 20px;
         }
         .container {
-            max-width: 600px;
+            max-width: 500px;
             margin: 0 auto;
-            background-color: #2a2a2a;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.5);
             border: 2px solid #ffd700;
+            border-radius: 20px;
+            padding: 20px;
+            background-color: #000000;
         }
-        h1 { color: #ffd700; }
-        .match {
-            background-color: #333;
+        h1 {
+            color: #ffd700;
+            text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.3);
+        }
+        .match-box {
+            border: 1px solid #ffd700;
             margin: 15px 0;
-            padding: 15px;
+            padding: 10px;
             border-radius: 10px;
-            border-left: 5px solid #ffd700;
         }
         .prediction {
             color: #00ff00;
@@ -36,37 +37,37 @@
         }
         .tarot-button {
             background-color: #ffd700;
-            color: #1a1a1a;
+            color: #000000;
             border: none;
             padding: 15px 30px;
-            font-size: 1.2em;
+            font-size: 1em;
             font-weight: bold;
-            border-radius: 5px;
+            border-radius: 50px;
             cursor: pointer;
             margin-top: 20px;
+            text-transform: uppercase;
         }
-        .tarot-button:hover { background-color: #ffed4a; }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🔮 Tarot Maestro 🔮</h1>
-        <p>Predicciones de Fútbol y Guía Espiritual</p>
+        <h1>🔮 MAESTRO TAROT 🔮</h1>
+        <p style="color: #ffd700;">Predicciones Deportivas Profesionales</p>
         
-        <div class="match">
-            <p>Próximo Partido:</p>
-            <p><strong>Real Madrid vs. Atlético de Madrid</strong></p>
-            <p class="prediction">Predicción del Oráculo: Victoria Local</p>
+        <div class="match-box">
+            <p>JORNADA 21</p>
+            <p><strong>Real Madrid vs Almería</strong></p>
+            <p class="prediction">PREDICCIÓN: VICTORIA LOCAL</p>
         </div>
 
-        <div class="match">
-            <p>Próximo Partido:</p>
-            <p><strong>Manchester City vs. Liverpool</strong></p>
-            <p class="prediction">Predicción del Oráculo: Ambos Marcan</p>
+        <div class="match-box">
+            <p>JORNADA 21</p>
+            <p><strong>Girona vs Sevilla</strong></p>
+            <p class="prediction">PREDICCIÓN: AMBOS MARCAN</p>
         </div>
 
-        <button class="tarot-button" onclick="alert('Las cartas dicen que la suerte está de tu lado. ¡Confía en tu intuición!')">
-            HACER TIRADA DE TAROT
+        <button class="tarot-button" onclick="alert('Las cartas confirman tu intuición. ¡Mucha suerte!')">
+            Hacer Tirada de Tarot
         </button>
     </div>
 </body>
