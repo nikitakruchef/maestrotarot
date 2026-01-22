@@ -3,41 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="coinzilla" content="876e6032c5174633e8f3eef3d3df0f9e" />
-    <title>Maestro Tarot - Predicciones Deportivas</title>
+    <title>Tarot Maestro - Predicciones de Fútbol</title>
     <style>
-        body { background-color: #0d0d0d; color: white; font-family: sans-serif; text-align: center; padding: 20px; }
-        .caja-partidos { border: 2px solid #00ff00; border-radius: 10px; padding: 15px; margin: 20px auto; max-width: 500px; background: #1a1a1a; }
-        .partido { border-bottom: 1px solid #333; padding: 10px 0; }
-        .prediccion { color: #00ff00; font-weight: bold; }
-        .btn-tirar { background: gold; color: black; padding: 15px; border: none; font-weight: bold; cursor: pointer; border-radius: 5px; }
-        h1 { color: gold; }
+        body {
+            background-color: #1a1a1a;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #2a2a2a;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border: 2px solid #ffd700;
+        }
+        h1 { color: #ffd700; }
+        .match {
+            background-color: #333;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 5px solid #ffd700;
+        }
+        .prediction {
+            color: #00ff00;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .tarot-button {
+            background-color: #ffd700;
+            color: #1a1a1a;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        .tarot-button:hover { background-color: #ffed4a; }
     </style>
 </head>
 <body>
-
-    <h1>🔮 MAESTRO TAROT 🔮</h1>
-    <p>Predicciones de Fútbol y Oráculo</p>
-
-    <div class="caja-partidos">
-        <h2>⚽ PREDICCIONES DE HOY</h2>
-        <div class="partido">
-            <p>Real Madrid vs Barcelona</p>
-            <p class="prediccion">Predicción: Victoria Local / Más de 2.5 goles</p>
-        </div>
-        <div class="partido">
-            <p>Atlético de Madrid vs Sevilla</p>
-            <p class="prediccion">Predicción: Empate</p>
-        </div>
+    <div class="container">
+        <h1>🔮 Tarot Maestro 🔮</h1>
+        <p>Predicciones de Fútbol y Guía Espiritual</p>
+        
+        <div class="match">
+            <p>Próximo Partido:</p>
+            <p><strong>Real Madrid vs. Atlético de Madrid</strong></p>
+            <p class="prediction">Predicción del Oráculo: Victoria Local</p>
         </div>
 
-    <div style="border: 2px solid gold; padding: 20px; border-radius: 10px; max-width: 500px; margin: 0 auto;">
-        <h2>🃏 EL ORÁCULO</h2>
-        <p>Haz tu pregunta sobre los partidos o tu suerte.</p>
-        <button class="btn-tirar" onclick="alert('Consultando a los astros sobre el resultado...')">REALIZAR TIRADA</button>
+        <div class="match">
+            <p>Próximo Partido:</p>
+            <p><strong>Manchester City vs. Liverpool</strong></p>
+            <p class="prediction">Predicción del Oráculo: Ambos Marcan</p>
+        </div>
+
+        <button class="tarot-button" onclick="alert('Las cartas dicen que la suerte está de tu lado. ¡Confía en tu intuición!')">
+            HACER TIRADA DE TAROT
+        </button>
     </div>
-
-    <p style="margin-top: 50px; color: #444; font-size: 10px;">Verificación: 876e6032c5174633e8f3eef3d3df0f9e</p>
-
 </body>
 </html>
