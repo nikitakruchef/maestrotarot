@@ -3,72 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tarot Maestro - Predicciones de Fútbol</title>
+    <title>Tarot Maestro</title>
     <style>
         body {
             background-color: #000000;
             color: #ffffff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            text-align: center;
-            padding: 20px;
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
-        .container {
-            max-width: 500px;
-            margin: 0 auto;
+        .main-card {
+            background-color: #111;
             border: 2px solid #ffd700;
             border-radius: 20px;
-            padding: 20px;
-            background-color: #000000;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+            max-width: 400px;
+            width: 90%;
         }
         h1 {
             color: #ffd700;
-            text-shadow: 2px 2px 4px rgba(255, 215, 0, 0.3);
+            font-size: 2em;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
         }
-        .match-box {
-            border: 1px solid #ffd700;
-            margin: 15px 0;
-            padding: 10px;
-            border-radius: 10px;
-        }
-        .prediction {
-            color: #00ff00;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-        .tarot-button {
-            background-color: #ffd700;
-            color: #000000;
+        .btn-gold {
+            background: linear-gradient(45deg, #ffd700, #b8860b);
+            color: black;
             border: none;
             padding: 15px 30px;
-            font-size: 1em;
+            font-size: 1.1em;
             font-weight: bold;
             border-radius: 50px;
             cursor: pointer;
-            margin-top: 20px;
             text-transform: uppercase;
+            transition: 0.3s;
+        }
+        .btn-gold:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 15px #ffd700;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🔮 MAESTRO TAROT 🔮</h1>
-        <p style="color: #ffd700;">Predicciones Deportivas Profesionales</p>
-        
-        <div class="match-box">
-            <p>JORNADA 21</p>
-            <p><strong>Real Madrid vs Almería</strong></p>
-            <p class="prediction">PREDICCIÓN: VICTORIA LOCAL</p>
-        </div>
 
-        <div class="match-box">
-            <p>JORNADA 21</p>
-            <p><strong>Girona vs Sevilla</strong></p>
-            <p class="prediction">PREDICCIÓN: AMBOS MARCAN</p>
-        </div>
-
-        <button class="tarot-button" onclick="alert('Las cartas confirman tu intuición. ¡Mucha suerte!')">
-            Hacer Tirada de Tarot
+    <div class="main-card">
+        <h1>🔮 MAESTRO TAROT</h1>
+        <p>Tu destino en las cartas y el deporte</p>
+        <br>
+        <button class="btn-gold" onclick="alert('Las cartas se están mezclando... Prepárate.')">
+            REALIZAR TIRADA
         </button>
     </div>
+
 </body>
 </html>
