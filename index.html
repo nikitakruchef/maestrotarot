@@ -30,10 +30,9 @@
 <div class="caja">
     <h2>⚽ ORÁCULO DEPORTIVO</h2>
     <select id="selJ" onchange="cambiarJornada()">
-        <option value="">-- Elige Jornada (23-30) --</option>
+        <option value="">-- Elige Jornada (24-30) --</option>
         
         
-        <option value="j23">Jornada 23</option>
         <option value="j24">Jornada 24</option>
         <option value="j25">Jornada 25</option>
         <option value="j26">Jornada 26</option>
@@ -63,15 +62,13 @@
 
 <script>
 const liga = {
-    
-    j23: ["Barça-Athletic", "Sociedad-Madrid", "Atleti-Mallorca", "Villarreal-Betis", "Girona-Espanyol", "Sevilla-Valencia", "Celta-Osasuna", "Rayo-Elche", "Alavés-Getafe", "Oviedo-Levante"],
-    j24: ["Madrid-Barça", "Athletic-Atleti", "Valencia-Villarreal", "Betis-Sociedad", "Espanyol-Sevilla", "Osasuna-Girona", "Getafe-Rayo", "Mallorca-Alavés", "Levante-Celta", "Elche-Oviedo"],
-    j25: ["Barça-Levante", "Atleti-Espanyol", "Villarreal-Madrid", "Sociedad-Athletic", "Sevilla-Betis", "Girona-Getafe", "Celta-Mallorca", "Rayo-Valencia", "Alavés-Osasuna", "Oviedo-Elche"],
-    j26: ["Espanyol-Barça", "Madrid-Sevilla", "Athletic-Villarreal", "Valencia-Atleti", "Betis-Girona", "Osasuna-Sociedad", "Getafe-Levante", "Mallorca-Rayo", "Elche-Alavés", "Celta-Oviedo"],
-    j27: ["Barça-Getafe", "Atleti-Villarreal", "Sociedad-Sevilla", "Girona-Madrid", "Valencia-Espanyol", "Rayo-Celta", "Alavés-Betis", "Levante-Mallorca", "Oviedo-Athletic", "Elche-Osasuna"],
-    j28: ["Madrid-Alavés", "Athletic-Elche", "Villarreal-Girona", "Sevilla-Atleti", "Betis-Rayo", "Espanyol-Sociedad", "Osasuna-Barça", "Getafe-Oviedo", "Mallorca-Valencia", "Celta-Levante"],
-    j29: ["Barça-Betis", "Atleti-Madrid", "Girona-Athletic", "Sociedad-Villarreal", "Valencia-Osasuna", "Rayo-Sevilla", "Alavés-Celta", "Levante-Espanyol", "Oviedo-Mallorca", "Elche-Getafe"],
-    j30: ["Madrid-Levante", "Athletic-Betis", "Atleti-Girona", "Villarreal-Barça", "Sevilla-Sociedad", "Espanyol-Rayo", "Osasuna-Oviedo", "Getafe-Alavés", "Mallorca-Elche", "Celta-Valencia"]
+    j24: ["Elche-Osasuna", "Espanyol-Celta", "Getafe-Villarreal", "Sevilla-Alavés", "Madrid-Sociedad", "Oviedo-Athletic", "Athletic-Rayo", "Atlético-Levante", "Valencia-Mallorca", "Betis-Girona", "Barcelona-Girona"],
+    j25: ["Athletic-Elche", "Sociedad-Oviedo", "Betis-Rayo", "Osasuna-Madrid", "Atlético-Espanyol", "Getafe-Sevilla", "Barcelona-Levante", "Celta-Mallorca", "Villarreal-Valencia", "Alavés-Girona"],
+    j26: ["Levante-Alavés", "Rayo-Athletic", "Barcelona-Villarreal", "Mallorca-Sociedad", "Oviedo-Atlético", "Elche-Espanyol", "Valencia-Osasuna", "Betis-Sevilla", "Girona-Celta", "Madrid-Getafe"],
+    j27: ["Athletic-Barça", "Atlético-Sociedad", "Celta-Madrid", "Espanyol-Oviedo", "Getafe-Betis", "Levante-Girona", "Osasuna-Mallorca", "Sevilla-Rayo", "Valencia-Alavés", "Villarreal-Elche"],
+    j28: ["Alavés-Villarreal", "Atlético-Getafe", "Barça-Sevilla", "Girona-Athletic", "Mallorca-Espanyol", "Rayo-Levante", "Betis-Celta", "Madrid-Elche", "Oviedo-Valencia", "Sociedad-Osasuna"],
+    j29: ["Athletic-Betis", "Barça-Rayo", "Celta-Alavés", "Elche-Mallorca", "Espanyol-Getafe", "Levante-Oviedo", "Osasuna-Girona", "Madrid-Atlético", "Sevilla-Valencia", "Villarreal-Sociedad"],
+    j30: ["Alavés-Osasuna", "Atlético-Barça", "Getafe-Athletic", "Girona-Villarreal", "Mallorca-Madrid", "Rayo-Elche", "Betis-Espanyol", "Oviedo-Sevilla", "Sociedad-Levante", "Valencia-Celta"]
 };
 
 const mazo = [
@@ -125,13 +122,3 @@ function hacerTirada(tipo) {
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
